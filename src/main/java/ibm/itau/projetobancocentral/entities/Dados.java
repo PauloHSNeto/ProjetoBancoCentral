@@ -2,7 +2,8 @@ package ibm.itau.projetobancocentral.entities;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
+
 
 @Entity
 @Table(name = "dados")
@@ -13,13 +14,13 @@ public class Dados implements java.io.Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    private Date date;
+    private LocalDate date;
     private BigDecimal valor;
 
     public Dados() {
     }
 
-    public Dados(Date data, BigDecimal valor) {
+    public Dados(LocalDate date, BigDecimal valor) {
         this.date = date;
         this.valor = valor;
     }
@@ -32,11 +33,11 @@ public class Dados implements java.io.Serializable {
         this.id = id;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
