@@ -1,5 +1,8 @@
 package ibm.itau.projetobancocentral.entities;
 
+import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -12,16 +15,14 @@ public class Dados implements java.io.Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
-    private LocalDate date;
+    private LocalDate data;
     private BigDecimal valor;
 
     public Dados() {
     }
-
-    public Dados(LocalDate date, BigDecimal valor) {
-        this.date = date;
+    public Dados(LocalDate data, BigDecimal valor) {
+        this.data = data;
         this.valor = valor;
     }
 
@@ -33,12 +34,12 @@ public class Dados implements java.io.Serializable {
         this.id = id;
     }
 
-    public LocalDate getDate() {
-        return date;
+    public LocalDate getData() {
+        return data;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
+    public void setData(LocalDate data) {
+        this.data = data;
     }
 
     public BigDecimal getValor() {
