@@ -1,9 +1,7 @@
 # ProjetoBancoCentral
 Desafio Itau
 
-O código da aplicação deve conter um arquivo README.md com as instruções 
-sobre como configurar o ambiente e executar o aplicativo, assim como a descrição dos 
-arquivos importantes para que os avaliadores sejam objetivos em sua análise.
+estagiario Paulo Henrique da Silva Neto, trilha Java back end Itau
 
 O projeto foi construído com as technologias:
   JDK Amazon correto 11
