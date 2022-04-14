@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -51,5 +52,15 @@ public class DadosController {
     public ResponseEntity<Dados> deleteDados(@PathVariable Long id) {
         dadosServices.deleteById(id);
         return ResponseEntity.ok().build();
+    }
+    @GetMapping(value = "/total/{year}")
+    public ResponseEntity<BigDecimal> getMax(@PathVariable int year) {
+        BigDecimal total = dadosServices.total(year);
+        return ResponseEntity.ok(total);
+    }
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Dados> putDados(@PathVariable Long id, @RequestBody Map<String,String> body) {
+        Dados dado  = dadosServices.update(id, body);
+        return ResponseEntity.ok(dado);
     }
 }

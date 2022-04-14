@@ -67,7 +67,28 @@ public class DadosServices {
     public void deleteById(Long id) {
         dadosRepository.deleteById(id);
     }
+    public BigDecimal total(int year) {
+        List<Dados> list = dadosRepository.findAll();
+        List<Dados> listaFiltrada =new ArrayList<Dados>();
+        BigDecimal total = new BigDecimal(0);
+        for (Dados d: list) {
+            if (d.getData().getYear() == year) {
+                total = total.add(d.getValor());
+                listaFiltrada.add(d);
+            }
+        }
+        return total;
+    }
+    public Dados update(Long id, Map<String,String> dado){
+        Dados dadosSalvo = dadosRepository.findById(id).get();
+        dadosSalvo.setData(LocalDate.parse(dado.get("data"), formatter));
+        dadosSalvo.setValor(new BigDecimal(dado.get("valor")));
+        dadosRepository.save(dadosSalvo);
+        return dadosSalvo;
+    }
 
-}
+    }
+
+
 
 
