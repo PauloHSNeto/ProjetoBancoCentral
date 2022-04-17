@@ -29,7 +29,7 @@ public class DadosServices {
         List<Dados> list = dadosRepository.findAll();
         List<Dados> listaFiltrada =new ArrayList<Dados>();
         for (Dados d: list) {
-            if (d.getData().getMonth().toString().equals(month.toUpperCase())) {
+            if (d.getData().getMonth().toString().equals(month.toUpperCase())) {//filter by month
                 listaFiltrada.add(d);
             }
         }
@@ -49,7 +49,7 @@ public class DadosServices {
         List<Dados> list = dadosRepository.findAll();
         List<Dados> listaFiltrada =new ArrayList<Dados>();
         for (Dados d: list) {
-            if (d.getData().getYear() == year) {
+            if (d.getData().getYear() == year) { //filter by year
                 listaFiltrada.add(d);
             }
         }
@@ -87,7 +87,8 @@ public class DadosServices {
         return dadosSalvo;
     }
 
-    }
+
+}
 
 
 

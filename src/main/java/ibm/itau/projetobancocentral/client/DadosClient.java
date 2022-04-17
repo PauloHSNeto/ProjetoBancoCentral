@@ -1,14 +1,19 @@
-package ibm.itau.projetobancocentral.AppConfig;
+package ibm.itau.projetobancocentral.client;
 
 import ibm.itau.projetobancocentral.entities.Dados;
 import ibm.itau.projetobancocentral.repositories.DadosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
-@Configuration
-public class AppConfig implements CommandLineRunner {
+
+import javax.transaction.Transactional;
+import java.util.Arrays;
+
+@Component
+@Transactional
+public class DadosClient implements CommandLineRunner {
     @Autowired
     private DadosRepository dadosRepository;
     @Autowired
@@ -19,12 +24,10 @@ public class AppConfig implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-
-        Dados[] arraysDeDados = restTemplate.getForObject(url, Dados[].class);
-
-        for (Dados d : arraysDeDados)  dadosRepository.save(d);
-
-
+        if (dadosRepository.count() == 0) { // Se não existir dados no banco, então cria
+        Dados[] arraysDeDados = restTemplate.getForObject(url, Dados[].class); // Busca os dados da API
+        dadosRepository.saveAll(Arrays.asList(arraysDeDados)); // Salva os dados no banco
+        }
     }
 }
 

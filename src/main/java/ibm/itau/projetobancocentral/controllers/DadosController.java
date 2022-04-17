@@ -3,20 +3,21 @@ import ibm.itau.projetobancocentral.entities.Dados;
 import ibm.itau.projetobancocentral.services.DadosServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
-@RestController
-@RequestMapping(value = "/dados")
+@Controller
 public class DadosController {
 
     @Autowired
     private DadosServices dadosServices;
 
-    @GetMapping
+    @GetMapping(value ="/dados")
     public ResponseEntity<List<Dados>> getDados() {
         List<Dados> dados = dadosServices.findAll();
         return ResponseEntity.ok(dados);
@@ -63,4 +64,11 @@ public class DadosController {
         Dados dado  = dadosServices.update(id, body);
         return ResponseEntity.ok(dado);
     }
+    //thymeleaf Mapping
+    @GetMapping
+    public String thymeleaf(Model model) {
+        model.addAttribute("dados", dadosServices.findAll());
+        return "index";
+    }
+
 }
