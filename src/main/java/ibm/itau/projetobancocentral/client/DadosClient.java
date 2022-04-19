@@ -14,12 +14,20 @@ import java.util.Arrays;
 @Component
 @Transactional
 public class DadosClient implements CommandLineRunner {
-    @Autowired
+
+    public DadosClient(DadosRepository dadosRepository,
+                       RestTemplate restTemplate,
+                       @Value("${banco-central-api-url}")
+                       String url) {
+        this.dadosRepository = dadosRepository;
+        this.restTemplate = restTemplate;
+
+        this.url = url;
+    }
+
     private DadosRepository dadosRepository;
-    @Autowired
     public RestTemplate restTemplate;
 
-    @Value("${banco-central-api-url}")
     String url;
 
     @Override
