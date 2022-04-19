@@ -14,6 +14,7 @@
         <th>id</th>
         <th>Data</th>
         <th>%PIB</th>
+        <th>Diference</th>
     </tr>
     </thead>
     <tbody>
@@ -21,6 +22,8 @@
         <td th:text="${p.getId()}"></td>
         <td th:text="${p.getData()}"></td>
         <td th:text="${p.getValor()}"></td>
+        <td th:unless="${p == dados[0]}" th:text="${dados[dados.indexOf(p)-1].getValor-p.getValor()}"></td>
+
     </tr>
     </tbody>
 </table>
