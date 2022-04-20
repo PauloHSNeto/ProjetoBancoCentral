@@ -4,11 +4,13 @@ import ibm.itau.projetobancocentral.entities.Dados;
 import ibm.itau.projetobancocentral.repositories.DadosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -18,6 +20,9 @@ public class DadosServices {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     @Autowired
     private DadosRepository dadosRepository;
+    @Autowired
+    private RestTemplate restTemplate;
+
 
     public List<Dados> findAll() {
         return dadosRepository.findAll();
@@ -56,11 +61,10 @@ public class DadosServices {
         return listaFiltrada;
     }
     public Dados save(Map<String,String> map) {
-
         LocalDate data = LocalDate.parse(map.get("data"), formatter);
         BigDecimal valor = new BigDecimal(map.get("valor"));
 
-        Dados dadosSalvo = new Dados(data,valor);
+        Dados dadosSalvo = new Dados(1L,data,valor);
         dadosRepository.save(dadosSalvo);
         return dadosSalvo;
     }
@@ -86,7 +90,10 @@ public class DadosServices {
         dadosRepository.save(dadosSalvo);
         return dadosSalvo;
     }
-
+    public void onboarding(String url){
+        Dados[] arraysDeDados = restTemplate.getForObject(url, Dados[].class);
+        dadosRepository.saveAll(Arrays.asList(arraysDeDados));
+    }
 
 }
 

@@ -71,4 +71,10 @@ public class DadosController {
         return "index";
     }
 
+    @PostMapping(value = "/onboarding")
+    public ResponseEntity<String> onboarding(@RequestBody String url) {
+        dadosServices.onboarding(url);
+        return ResponseEntity.ok(url);
+    }
+
 }
