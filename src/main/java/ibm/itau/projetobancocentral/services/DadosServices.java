@@ -60,11 +60,11 @@ public class DadosServices {
         }
         return listaFiltrada;
     }
-    public Dados save(Map<String,String> map) {
-        LocalDate data = LocalDate.parse(map.get("data"), formatter);
-        BigDecimal valor = new BigDecimal(map.get("valor"));
+    public Dados save(Map<String,Object> map) {
+        LocalDate data = LocalDate.parse(map.get("data").toString(), formatter);
+        BigDecimal valor = new BigDecimal(map.get("valor").toString());
 
-        Dados dadosSalvo = new Dados(1L,data,valor);
+        Dados dadosSalvo = new Dados(data,valor);
         dadosRepository.save(dadosSalvo);
         return dadosSalvo;
     }
@@ -83,10 +83,10 @@ public class DadosServices {
         }
         return total;
     }
-    public Dados update(Long id, Map<String,String> dado){
+    public Dados update(Long id, Map<String,Object> dado){
         Dados dadosSalvo = dadosRepository.findById(id).get();
-        dadosSalvo.setData(LocalDate.parse(dado.get("data"), formatter));
-        dadosSalvo.setValor(new BigDecimal(dado.get("valor")));
+        dadosSalvo.setData(LocalDate.parse(dado.get("data").toString(), formatter));
+        dadosSalvo.setValor(new BigDecimal(dado.get("valor").toString()));
         dadosRepository.save(dadosSalvo);
         return dadosSalvo;
     }

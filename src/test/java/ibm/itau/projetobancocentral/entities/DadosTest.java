@@ -2,67 +2,80 @@ package ibm.itau.projetobancocentral.entities;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
-@ActiveProfiles("test")
 class DadosTest {
-    LocalDate date = LocalDate.of(1989,04,21);
-    BigDecimal valor = new BigDecimal(-5.33);
-    Dados example = new Dados(date,valor);
 
+    Dados d = new Dados(LocalDate.now(),BigDecimal.valueOf(100));
 
     @Test
     void getId() {
-        assertEquals(null,example.getId());
+        Long id = null;
+        assertEquals(id, d.getId());
     }
 
     @Test
     void getData() {
-        assertEquals(date,example.getData());
+        LocalDate date = LocalDate.now();
+        assertEquals(date, d.getData());
     }
 
     @Test
     void getValor() {
-        assertEquals(valor,example.getValor());
+        BigDecimal valor = BigDecimal.valueOf(100);
+        assertEquals(valor, d.getValor());
     }
 
     @Test
     void setId() {
-        example.setId(2L);
-        assertEquals(2,example.getId());
+        Long id = 1L;
+        d.setId(id);
+        assertEquals(id, d.getId());
     }
 
     @Test
-    void setData() {
-       example.setData(LocalDate.of(2021,04,20));
-       assertEquals(LocalDate.of(2021,04,20),example.getData());
+    void setData()  {
+        LocalDate date = LocalDate.of(2020, 1, 1);
+        d.setData(date);
+        assertEquals(date, d.getData());
     }
 
     @Test
     void setValor() {
-        example.setValor(new BigDecimal(15.98));
-        assertEquals(new BigDecimal(15.98),example.getValor());
+        BigDecimal valor = BigDecimal.valueOf(100);
+        d.setValor(valor);
+        assertEquals(valor, d.getValor());
     }
 
     @Test
     void testEquals() {
-
+        Dados d2 = new Dados(LocalDate.now(),BigDecimal.valueOf(100));
+        assertEquals(d, d2);
     }
 
     @Test
     void canEqual() {
+        Dados d2 = new Dados(LocalDate.now(),BigDecimal.valueOf(100));
+        assertTrue(d.canEqual(d2));
     }
 
     @Test
     void testHashCode() {
+        Dados d2 = new Dados(LocalDate.now(),BigDecimal.valueOf(100));
+        assertEquals(d.hashCode(), d2.hashCode());
     }
 
     @Test
     void testToString() {
+        String s = "Dados(" +
+                "id=" + d.getId() +
+                ", data=" + d.getData() +
+                ", valor=" + d.getValor() +
+                ')';
+        assertEquals(s, d.toString());
     }
 }

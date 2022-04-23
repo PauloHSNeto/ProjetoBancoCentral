@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
-@Controller
+@RestController
 public class DadosController {
 
     @Autowired
@@ -45,7 +45,7 @@ public class DadosController {
         return ResponseEntity.ok(dados);
     }
     @PostMapping
-    public ResponseEntity<Dados> postDados(@RequestBody Map<String,String> body) {
+    public ResponseEntity<Dados> postDados(@RequestBody Map<String,Object> body) {
         Dados dado  = dadosServices.save(body);
         return ResponseEntity.ok(dado);
     }
@@ -60,15 +60,9 @@ public class DadosController {
         return ResponseEntity.ok(total);
     }
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Dados> putDados(@PathVariable Long id, @RequestBody Map<String,String> body) {
+    public ResponseEntity<Dados> putDados(@PathVariable Long id, @RequestBody Map<String,Object> body) {
         Dados dado  = dadosServices.update(id, body);
         return ResponseEntity.ok(dado);
-    }
-    //thymeleaf Mapping
-    @GetMapping
-    public String thymeleaf(Model model) {
-        model.addAttribute("dados", dadosServices.findAll());
-        return "index";
     }
 
     @PostMapping(value = "/onboarding")
