@@ -11,6 +11,26 @@ import static org.junit.jupiter.api.Assertions.*;
 class DadosTest {
 
     @Test
+    void constructorWithAllArgsTest() {
+        //given
+        Dados dados = new Dados(1L,null,0.0);
+        //when
+        Dados dados2 = new Dados(1L,null,0.0);
+        //then
+        assertEquals(dados, dados2);
+    }
+
+    @Test
+    void constructorWithDataandValorTest() {
+        //given
+        Dados dados = new Dados(LocalDate.now(),100);
+        //when
+        Dados dados2 = new Dados(LocalDate.now(),100);
+        //then
+        assertEquals(dados, dados2);
+    }
+
+    @Test
     void getIdTest() {
         //given
         Dados d = new Dados();

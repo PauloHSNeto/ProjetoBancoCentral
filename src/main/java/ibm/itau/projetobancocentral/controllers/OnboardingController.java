@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(value = "/onboarding")
 public class OnboardingController {
-
     @Autowired
     private OnboardingServices onboardingServices;
 
     @PostMapping
     public ResponseEntity<String> onboarding(@RequestBody String url) {
+
         onboardingServices.onboarding(url);
         return ResponseEntity.ok("Onboarding realizado com sucesso!");
     }

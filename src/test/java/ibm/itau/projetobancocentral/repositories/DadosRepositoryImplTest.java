@@ -24,6 +24,7 @@ class DadosRepositoryImplTest {
 
     @AfterEach
     void tearDown() {
+        testRepository.deleteAll();
     }
 
     @Test

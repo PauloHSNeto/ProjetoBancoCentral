@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -18,7 +19,7 @@ public class CrudController {
 
     @GetMapping(value ="/dados")
     public ResponseEntity<List<Dados>> getDados() {
-        List<Dados> dados = crudServices.findAll();
+        List<Dados> dados = crudServices.getAllDados();
         return ResponseEntity.ok(dados);
     }
     //Get dados by id
@@ -29,7 +30,10 @@ public class CrudController {
     }
     @PostMapping
     public ResponseEntity<Dados> postDados(@RequestBody Map<String,Object> body) {
-        Dados dado  = crudServices.save(body);
+        LocalDate data = LocalDate.parse(body.get("data").toString());
+        double valor = (double) body.get("valor");
+        Dados dado = new Dados(data,valor);
+        crudServices.save(dado);
         return ResponseEntity.ok(dado);
     }
     @DeleteMapping(value = "/{id}")
@@ -38,8 +42,11 @@ public class CrudController {
         return ResponseEntity.ok().build();
     }
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Dados> putDados(@PathVariable Long id, @RequestBody Map<String,Object> body) {
-        Dados dado  = crudServices.update(id, body);
+    public ResponseEntity<Dados> putDados(@PathVariable Long id, @RequestBody Map<String,Object> map) {
+        LocalDate data = LocalDate.parse(map.get("data").toString());
+        double valor = (double) map.get("valor");
+        Dados dado = new Dados(id,data,valor);
+        crudServices.update(id, dado);
         return ResponseEntity.ok(dado);
     }
 }

@@ -5,6 +5,7 @@ import ibm.itau.projetobancocentral.repositories.DadosRepository;
 import ibm.itau.projetobancocentral.services.CrudServices;
 import ibm.itau.projetobancocentral.services.DataFilterServices;
 import ibm.itau.projetobancocentral.services.ValorFilterServices;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-
+@AllArgsConstructor
 @RequestMapping("/valorfilters")
 @RestController
 public class ValorFilterController {
@@ -59,7 +60,7 @@ public class ValorFilterController {
 
     @GetMapping(value = "/total")
     public ResponseEntity<String> getTotal() {
-        List<Dados> dados = crudServices.findAll();
+        List<Dados> dados = crudServices.getAllDados();
         double media = valorFilterServices.media();
         double total = valorFilterServices.total();
         String body = "Total de Dívida Líquida do Setor Público (% PIB) : " + total +"\n"

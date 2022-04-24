@@ -2,6 +2,7 @@ package ibm.itau.projetobancocentral.services;
 
 import ibm.itau.projetobancocentral.entities.Dados;
 import ibm.itau.projetobancocentral.repositories.DadosRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -12,15 +13,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+@AllArgsConstructor
 @Service
 public class CrudServices {
-
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
     @Autowired
-    private DadosRepository dadosRepository;
+    private final DadosRepository dadosRepository;
 
-    public List<Dados> findAll() {
+    public List<Dados> getAllDados() {
         return dadosRepository.findAll();
     }
 
@@ -28,23 +27,20 @@ public class CrudServices {
         return dadosRepository.findById(id).get();
     }
 
-    public Dados save(Map<String,Object> map) {
-        LocalDate data = LocalDate.parse(map.get("data").toString(), formatter);
-        double valor = (double) map.get("valor");
-        Dados dadosSalvo = new Dados(data,valor);
-        dadosRepository.save(dadosSalvo);
-        return dadosSalvo;
+    public Dados save(Dados dado) {
+        return dadosRepository.save(dado);
     }
     public void deleteById(Long id) {
         dadosRepository.deleteById(id);
     }
 
-    public Dados update(Long id, Map<String,Object> dado){
+    public Dados update(Long id, Dados dadoRecebido) {
+
         Dados dadosSalvo = dadosRepository.findById(id).get();
-        dadosSalvo.setData(LocalDate.parse(dado.get("data").toString(), formatter));
-        dadosSalvo.setValor((Double) dado.get("valor"));
-        dadosRepository.save(dadosSalvo);
-        return dadosSalvo;
+        dadosSalvo.setData(dadoRecebido.getData());
+        dadosSalvo.setValor(dadoRecebido.getValor());
+        return dadosRepository.save(dadosSalvo);
+
     }
 
     }
