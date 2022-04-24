@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class DadosTest {
 
-    Dados d = new Dados(LocalDate.now(),BigDecimal.valueOf(100));
+    Dados d = new Dados(LocalDate.now(),100);
 
     @Test
     void getId() {
@@ -26,8 +26,7 @@ class DadosTest {
 
     @Test
     void getValor() {
-        BigDecimal valor = BigDecimal.valueOf(100);
-        assertEquals(valor, d.getValor());
+        assertEquals(100, d.getValor());
     }
 
     @Test
@@ -46,26 +45,26 @@ class DadosTest {
 
     @Test
     void setValor() {
-        BigDecimal valor = BigDecimal.valueOf(100);
-        d.setValor(valor);
-        assertEquals(valor, d.getValor());
+
+        d.setValor(100);
+        assertEquals(100, d.getValor());
     }
 
     @Test
     void testEquals() {
-        Dados d2 = new Dados(LocalDate.now(),BigDecimal.valueOf(100));
+        Dados d2 = new Dados(LocalDate.now(),100);
         assertEquals(d, d2);
     }
 
     @Test
     void canEqual() {
-        Dados d2 = new Dados(LocalDate.now(),BigDecimal.valueOf(100));
+        Dados d2 = new Dados(LocalDate.now(),100);
         assertTrue(d.canEqual(d2));
     }
 
     @Test
     void testHashCode() {
-        Dados d2 = new Dados(LocalDate.now(),BigDecimal.valueOf(100));
+        Dados d2 = new Dados(LocalDate.now(),100);
         assertEquals(d.hashCode(), d2.hashCode());
     }
 

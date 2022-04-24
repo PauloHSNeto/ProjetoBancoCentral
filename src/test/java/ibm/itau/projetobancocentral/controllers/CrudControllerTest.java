@@ -2,30 +2,28 @@ package ibm.itau.projetobancocentral.controllers;
 
 import ibm.itau.projetobancocentral.entities.Dados;
 import ibm.itau.projetobancocentral.repositories.DadosRepository;
-import ibm.itau.projetobancocentral.services.DadosServices;
+import ibm.itau.projetobancocentral.services.CrudServices;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
-class DadosControllerTest {
+class CrudControllerTest {
     @Autowired
-    private DadosServices dadosServices;
+    private CrudServices crudServices;
 
     @Autowired
     private DadosRepository dadosRepository;
 
     @Autowired
-    private DadosController dadosController;
+    private CrudController crudController;
 
 
-    Dados d = new Dados(LocalDate.now(), BigDecimal.valueOf(99.99));
-    Dados d2 = new Dados(LocalDate.now(), BigDecimal.valueOf(96.99));
+    Dados d = new Dados(LocalDate.now(), 99.99);
+    Dados d2 = new Dados(LocalDate.now(), 96.99);
+    Dados d3 = new Dados(LocalDate.now(), 100.99);
 
     @Test
     void getDados() {

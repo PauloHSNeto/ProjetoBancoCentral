@@ -18,13 +18,13 @@ public class Dados implements java.io.Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy") //formata a data
     private LocalDate data;
-    private BigDecimal valor;
+    private double valor;
 
-    public Dados(LocalDate data, BigDecimal valor) {
+    public Dados(LocalDate data, double valor) {
         this.data = data;
         this.valor = valor;
     }
