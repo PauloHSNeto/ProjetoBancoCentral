@@ -10,71 +10,104 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class DadosTest {
 
-    Dados d = new Dados(LocalDate.now(),100);
-
     @Test
-    void getId() {
-        Long id = null;
-        assertEquals(id, d.getId());
-    }
-
-    @Test
-    void getData() {
-        LocalDate date = LocalDate.now();
-        assertEquals(date, d.getData());
-    }
-
-    @Test
-    void getValor() {
-        assertEquals(100, d.getValor());
-    }
-
-    @Test
-    void setId() {
+    void getIdTest() {
+        //given
+        Dados d = new Dados();
         Long id = 1L;
+        //when
         d.setId(id);
-        assertEquals(id, d.getId());
+        //then
+        assertEquals(1L, d.getId());
     }
 
     @Test
-    void setData()  {
+    void getDataTest() {
+        //given
+        Dados d = new Dados();
         LocalDate date = LocalDate.of(2020, 1, 1);
+        //when
         d.setData(date);
+        //then
         assertEquals(date, d.getData());
     }
 
     @Test
-    void setValor() {
-
-        d.setValor(100);
-        assertEquals(100, d.getValor());
+    void getValorTest() {
+        //given
+        Dados d = new Dados();
+        double valor = 100;
+        //when
+        d.setValor(valor);
+        //then
+        assertEquals(valor, d.getValor());
     }
 
     @Test
-    void testEquals() {
-        Dados d2 = new Dados(LocalDate.now(),100);
-        assertEquals(d, d2);
+    void setIdTest() {
+        //given
+        Dados d = new Dados();
+        Long id = 1L;
+        //when
+        d.setId(id);
+        //then
+        assertEquals(1L, d.getId());
     }
 
     @Test
-    void canEqual() {
+    void setDataTest()  {
+        //given
+        Dados d = new Dados();
+        LocalDate date = LocalDate.of(2020, 1, 1);
+        //when
+        d.setData(date);
+        //then
+        assertEquals(date, d.getData());
+    }
+
+    @Test
+    void setValorTest() {
+        //given
+        Dados d = new Dados();
+        double valor = 100;
+        //when
+        d.setValor(valor);
+        //then
+        assertEquals(valor, d.getValor());
+    }
+
+    @Test
+    void testEqualsTest() {
+        //given
+        Dados d = new Dados(LocalDate.now(),100);
         Dados d2 = new Dados(LocalDate.now(),100);
+        //when
+        assertTrue(d.equals(d2));
+    }
+
+    @Test
+    void canEqualTest() {
+        //given
+        Dados d = new Dados();
+        Dados d2 = new Dados();
+        //when
         assertTrue(d.canEqual(d2));
     }
 
     @Test
-    void testHashCode() {
+    void testHashCodeTest() {
+        //given
+        Dados d = new Dados(LocalDate.now(),100);
         Dados d2 = new Dados(LocalDate.now(),100);
+        //then
         assertEquals(d.hashCode(), d2.hashCode());
     }
 
     @Test
-    void testToString() {
-        String s = "Dados(" +
-                "id=" + d.getId() +
-                ", data=" + d.getData() +
-                ", valor=" + d.getValor() +
-                ')';
-        assertEquals(s, d.toString());
+    void testToStringTest() {
+        //given
+        Dados d = new Dados(null,100);
+        //then
+        assertEquals("Dados(id=null, data=null, valor=100.0)", d.toString());
     }
 }
