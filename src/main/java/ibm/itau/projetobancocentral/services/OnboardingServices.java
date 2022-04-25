@@ -20,6 +20,7 @@ public class OnboardingServices {
     private DadosRepository dadosRepository;
 
     public void onboarding(String url){
+
         Dados[] arraysDeDados = restTemplate.getForObject(url, Dados[].class);
         dadosRepository.saveAll(Arrays.asList(arraysDeDados));
 

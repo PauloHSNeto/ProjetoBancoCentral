@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 
@@ -30,7 +31,8 @@ public class CrudController {
     }
     @PostMapping
     public ResponseEntity<Dados> postDados(@RequestBody Map<String,Object> body) {
-        LocalDate data = LocalDate.parse(body.get("data").toString());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate data = LocalDate.parse(body.get("data").toString(),formatter);
         double valor = (double) body.get("valor");
         Dados dado = new Dados(data,valor);
         crudServices.save(dado);
@@ -43,7 +45,8 @@ public class CrudController {
     }
     @PutMapping(value = "/{id}")
     public ResponseEntity<Dados> putDados(@PathVariable Long id, @RequestBody Map<String,Object> map) {
-        LocalDate data = LocalDate.parse(map.get("data").toString());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate data = LocalDate.parse(map.get("data").toString(),formatter);
         double valor = (double) map.get("valor");
         Dados dado = new Dados(id,data,valor);
         crudServices.update(id, dado);
