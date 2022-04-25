@@ -22,12 +22,13 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
+
 class CrudServicesTest {
 
 
     @Mock
     private DadosRepository mockRepository;
-    @InjectMocks
+
     private CrudServices testServices;
 
     @BeforeEach
@@ -36,7 +37,7 @@ class CrudServicesTest {
     }
 
     @Test
-    void findAll() {
+    void findAllTest() {
         //given
         testServices.getAllDados();
         //then
@@ -45,7 +46,7 @@ class CrudServicesTest {
 
     @Test
     void findById() {
-        //given
+        //when
         testServices.findById(1L);
         //then
         verify(mockRepository, times(1)).findById(1L);

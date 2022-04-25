@@ -30,6 +30,7 @@ public class CrudServices {
     public Dados save(Dados dado) {
         return dadosRepository.save(dado);
     }
+
     public void deleteById(Long id) {
         dadosRepository.deleteById(id);
     }
@@ -42,9 +43,7 @@ public class CrudServices {
         return dadosRepository.save(dadosSalvo);
 
     }
-
-    }
-
+}
 
 
 
