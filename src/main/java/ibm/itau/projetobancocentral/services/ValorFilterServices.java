@@ -18,6 +18,7 @@ public class ValorFilterServices {
     public List<Dados> findByValorBellow(double valor) {
         return dadosRepository.findBelowValue(valor);
     }
+
     public List<Dados> findAboveYearAverage(int year) {
         return dadosRepository.findByYearAboveValue(year,mediaByYear(year));
     }
@@ -30,6 +31,8 @@ public class ValorFilterServices {
     public List<Dados> findAboveTotalAverage() {
         return dadosRepository.findAboveValue(media());
     }
+
+
     public double total() {
         double total = 0;
         for (Dados d:  dadosRepository.findAll()) {
@@ -37,6 +40,9 @@ public class ValorFilterServices {
         }
         return total;
     }
+
+
+
     public double totalDoAno(int year) {
         double total = 0;
         for (Dados d: dadosRepository.findByYear(year)) {

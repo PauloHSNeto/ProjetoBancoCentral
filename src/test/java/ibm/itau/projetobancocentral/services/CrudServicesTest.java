@@ -14,21 +14,19 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-
 class CrudServicesTest {
 
-
+    @Mock
+    private Dados dado;
     @Mock
     private DadosRepository mockRepository;
-
+    @Autowired
     private CrudServices testServices;
 
     @BeforeEach
@@ -41,19 +39,22 @@ class CrudServicesTest {
         //given
         testServices.getAllDados();
         //then
-        verify(mockRepository, times(1)).findAll();
+        verify(mockRepository).findAll();
     }
 
     @Test
-    void findById() {
+    void findByIdTest() {
+        Dados d1 =new Dados();
         //when
-        testServices.findById(1L);
+        when(mockRepository.findById(1L)).thenReturn(Optional.of(d1));
+        Dados dResult = testServices.findById(1L);
         //then
-        verify(mockRepository, times(1)).findById(1L);
+        verify(mockRepository).findById(1L);
+        assertEquals(d1,dResult);
     }
 
     @Test
-    void save() {
+    void saveTest() {
         //given
         Dados dado = new Dados();
         //when
@@ -72,7 +73,7 @@ class CrudServicesTest {
 
 
     @Test
-    void deleteById() {
+    void deleteByIdTest() {
         //given
         testServices.deleteById(1L);
         //then
@@ -80,14 +81,22 @@ class CrudServicesTest {
     }
 
     @Test
-    void update() {
+    void updateTest() {
         //given
-        Dados dado = new Dados(1L, LocalDate.now(), 100);
-        mockRepository.save(dado);
+        Dados d1 = new Dados(LocalDate.now(), 1);
+        Dados d2 = new Dados(LocalDate.now(), 1);
+
         //when
-        Dados dado2 = new Dados(1L,LocalDate.now(),100.09);
-        testServices.update(1L,dado2);
+        when(mockRepository.findById(1L)).thenReturn(Optional.of(d1));
+       Dados dResult = testServices.update(1L,d2);
         //then
-        verify(mockRepository, times(1)).save(dado2);
-    }
+        ArgumentCaptor<Dados> dadosArgumentCaptor =
+                ArgumentCaptor.forClass(Dados.class);
+
+        verify(mockRepository)
+                .save(dadosArgumentCaptor.capture());
+
+        Dados capturedDados = dadosArgumentCaptor.getValue();
+
+        assertEquals(capturedDados,d2);}
 }

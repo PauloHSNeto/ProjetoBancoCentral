@@ -9,6 +9,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 class DataFilterServicesTest {
@@ -29,19 +30,26 @@ class DataFilterServicesTest {
     }
 
     @Test
-    void findByDay() {
-        //todo: test findByDay method
+    void findByDayTest() {
         //when
-
+        dataFilterServices.findByDay(1);
         //then
-
+        verify(mockRepository).findByDay(1);
     }
 
     @Test
-    void findByYear() {
+    void findByYearTest() {
+        //when
+        dataFilterServices.findByYear(1);
+        //then
+        verify(mockRepository).findByYear(1);
     }
 
     @Test
-    void findByMonth() {
+    void findByMonthTest() {
+        //when
+        dataFilterServices.findByMonth("March");
+        //then
+        verify(mockRepository).findByMonth("March");
     }
 }
