@@ -8,21 +8,20 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
-class DataFilterServicesTest {
+class DateFilterServicesTest {
 
     @Mock
     private DadosRepository mockRepository;
 
-    private DataFilterServices dataFilterServices;
+    private DateFilterServices dateFilterServices;
 
 
     @BeforeEach
     void setUp() {
-        dataFilterServices = new DataFilterServices(mockRepository);
+        dateFilterServices = new DateFilterServices(mockRepository);
     }
 
     @AfterEach
@@ -32,7 +31,7 @@ class DataFilterServicesTest {
     @Test
     void findByDayTest() {
         //when
-        dataFilterServices.findByDay(1);
+        dateFilterServices.findByDay(1);
         //then
         verify(mockRepository).findByDay(1);
     }
@@ -40,7 +39,7 @@ class DataFilterServicesTest {
     @Test
     void findByYearTest() {
         //when
-        dataFilterServices.findByYear(1);
+        dateFilterServices.findByYear(1);
         //then
         verify(mockRepository).findByYear(1);
     }
@@ -48,7 +47,7 @@ class DataFilterServicesTest {
     @Test
     void findByMonthTest() {
         //when
-        dataFilterServices.findByMonth("March");
+        dateFilterServices.findByMonth("March");
         //then
         verify(mockRepository).findByMonth("March");
     }

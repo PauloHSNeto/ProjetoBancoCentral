@@ -2,7 +2,6 @@ package ibm.itau.projetobancocentral.services;
 
 import ibm.itau.projetobancocentral.entities.Dados;
 import ibm.itau.projetobancocentral.repositories.DadosRepository;
-import org.junit.Ignore;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,18 +18,18 @@ import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class ValorFilterServicesTest {
+class ValueServicesTest {
 
 
     @Mock
     private DadosRepository mockRepository;
 
-    private ValorFilterServices valorFilterServices;
+    private ValueServices valueServices;
 
 
     @BeforeEach
     void setUp() {
-        valorFilterServices = new ValorFilterServices(mockRepository);
+        valueServices = new ValueServices(mockRepository);
     }
 
     @AfterEach
@@ -40,7 +39,7 @@ class ValorFilterServicesTest {
     @Test
     void findByValorAboveTest() {
         //when
-        valorFilterServices.findByValorAbove(1);
+        valueServices.findByValorAbove(1);
         //then
         verify(mockRepository).findAboveValue(1);
     }
@@ -49,7 +48,7 @@ class ValorFilterServicesTest {
     @Test
     void findByValorBellowTest() {
         //when
-        valorFilterServices.findByValorBellow(1);
+        valueServices.findByValorBellow(1);
         //then
         verify(mockRepository).findBelowValue(1);
 
@@ -68,7 +67,7 @@ class ValorFilterServicesTest {
         //when
         when(mockRepository.findByYear(eq(2000))).thenReturn(dados);
         when(mockRepository.findByYearAboveValue(eq(2000),eq(1.5d))).thenReturn(dadosFiltrado);
-        List <Dados> result = valorFilterServices.findAboveYearAverage(2000);
+        List <Dados> result = valueServices.findAboveYearAverage(2000);
         //then
         verify(mockRepository,times(1)).findByYearAboveValue(eq(2000),eq(1.5d));
         verify(mockRepository,times(2)).findByYear(eq(2000));
@@ -97,7 +96,7 @@ class ValorFilterServicesTest {
         //when
         when(mockRepository.findByYear(eq(2000))).thenReturn(dadosFiltrados);
         when(mockRepository.findByYearBelowValue(eq(2000),eq(1.5d))).thenReturn(dadosFiltrado2);
-        List <Dados> result = valorFilterServices.findBelowYearAverage(2000);
+        List <Dados> result = valueServices.findBelowYearAverage(2000);
         //then
         verify(mockRepository,times(1)).findByYearBelowValue(eq(2000),eq(1.5d));
         verify(mockRepository,times(2)).findByYear(eq(2000));
@@ -122,7 +121,7 @@ class ValorFilterServicesTest {
         //when
         when(mockRepository.findAll()).thenReturn(dados);
         when(mockRepository.findBelowValue(3)).thenReturn(dados2);
-        List <Dados> result = valorFilterServices.findBelowTotalAverage();
+        List <Dados> result = valueServices.findBelowTotalAverage();
         //then
         verify(mockRepository,times(2)).findAll();
         assertNotNull(result);
@@ -146,7 +145,7 @@ class ValorFilterServicesTest {
         //when
         when(mockRepository.findAll()).thenReturn(dados);
         when(mockRepository.findAboveValue(3)).thenReturn(dados2);
-        List <Dados> result = valorFilterServices.findAboveTotalAverage();
+        List <Dados> result = valueServices.findAboveTotalAverage();
         //then
         verify(mockRepository,times(2)).findAll();
         assertNotNull(result);
@@ -168,7 +167,7 @@ class ValorFilterServicesTest {
 
         when(mockRepository.findAll()).thenReturn(dados);
         //when
-        double result = valorFilterServices.total();
+        double result = valueServices.total();
         //then
         assertEquals(6, result);
 
@@ -188,7 +187,7 @@ class ValorFilterServicesTest {
 
         when(mockRepository.findByYear(2000)).thenReturn(dados);
         //when
-        double result = valorFilterServices.totalDoAno(2000);
+        double result = valueServices.totalDoAno(2000);
         //then
         assertEquals(3, result);
 
@@ -209,7 +208,7 @@ class ValorFilterServicesTest {
 
         when(mockRepository.findAll()).thenReturn(dados);
         //when
-        double result = valorFilterServices.media();
+        double result = valueServices.media();
         //then
         assertEquals(3, result);
 
@@ -230,7 +229,7 @@ class ValorFilterServicesTest {
 
         when(mockRepository.findByYear(2000)).thenReturn(dados);
         //when
-        double result = valorFilterServices.mediaByYear(2000);
+        double result = valueServices.mediaByYear(2000);
         //then
         assertEquals(1.5, result);
 

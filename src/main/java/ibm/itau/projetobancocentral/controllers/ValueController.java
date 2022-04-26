@@ -3,8 +3,8 @@ package ibm.itau.projetobancocentral.controllers;
 import ibm.itau.projetobancocentral.entities.Dados;
 import ibm.itau.projetobancocentral.repositories.DadosRepository;
 import ibm.itau.projetobancocentral.services.CrudServices;
-import ibm.itau.projetobancocentral.services.DataFilterServices;
-import ibm.itau.projetobancocentral.services.ValorFilterServices;
+import ibm.itau.projetobancocentral.services.DateFilterServices;
+import ibm.itau.projetobancocentral.services.ValueServices;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,42 +15,42 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 @AllArgsConstructor
-@RequestMapping("/valorfilters")
+@RequestMapping("/values")
 @RestController
-public class ValorFilterController {
+public class ValueController {
     @Autowired
     private CrudServices crudServices;
     @Autowired
-    public ValorFilterServices valorFilterServices;
+    public ValueServices valueServices;
     @Autowired
-    public DataFilterServices dataFilterServices;
+    public DateFilterServices dateFilterServices;
 
     @GetMapping(value = "/below-average/")
     public ResponseEntity<List<Dados>> getBelowAverageTotal() {
-        List<Dados> dados = valorFilterServices.findBelowTotalAverage();
+        List<Dados> dados = valueServices.findBelowTotalAverage();
         return ResponseEntity.ok(dados);
     }
     @GetMapping(value = "/above-average/")
     public ResponseEntity<List<Dados>> getAboveAverageTotal() {
-        List<Dados> dados = valorFilterServices.findAboveTotalAverage();
+        List<Dados> dados = valueServices.findAboveTotalAverage();
         return ResponseEntity.ok(dados);
     }
     @GetMapping(value = "/below-average/year/{year}/")
     public ResponseEntity<List<Dados>> getBelowAverageMonth(@PathVariable("year") int year) {
-        List<Dados> dados = valorFilterServices.findBelowYearAverage(year);
+        List<Dados> dados = valueServices.findBelowYearAverage(year);
         return ResponseEntity.ok(dados);
     }
     @GetMapping(value = "/above-average/year/{year}/")
     public ResponseEntity<List<Dados>> getAboveAverageMonth(@PathVariable("year") int year) {
-        List<Dados> dados = valorFilterServices.findAboveYearAverage(year);
+        List<Dados> dados = valueServices.findAboveYearAverage(year);
         return ResponseEntity.ok(dados);
     }
 
     @GetMapping(value = "/total/{year}")
     public ResponseEntity<String> getAverageByYear(@PathVariable int year) {
-        List<Dados> dados = dataFilterServices.findByYear(year);
-        double media = valorFilterServices.mediaByYear(year);
-        double totalDoAno = valorFilterServices.totalDoAno(year);
+        List<Dados> dados = dateFilterServices.findByYear(year);
+        double media = valueServices.mediaByYear(year);
+        double totalDoAno = valueServices.totalDoAno(year);
         String body ="Total de Dívida Líquida do Setor Público (% PIB) : " + totalDoAno +"\n"
                 + "Total de dados do ano " + year + ": " + dados.size() +"\n"
             + "Media de Dívida Líquida do Setor Público (% PIB) do ano " + year + ": " + media+"\n";
@@ -61,8 +61,8 @@ public class ValorFilterController {
     @GetMapping(value = "/total")
     public ResponseEntity<String> getTotal() {
         List<Dados> dados = crudServices.getAllDados();
-        double media = valorFilterServices.media();
-        double total = valorFilterServices.total();
+        double media = valueServices.media();
+        double total = valueServices.total();
         String body = "Total de Dívida Líquida do Setor Público (% PIB) : " + total +"\n"
                 + "Total de dados do ano : " + dados.size()+"\n"
                 + "Media de Dívida Líquida do Setor Público (% PIB) : " + media +"\n";

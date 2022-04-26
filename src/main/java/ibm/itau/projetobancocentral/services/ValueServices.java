@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 @AllArgsConstructor
 @Service
-public class ValorFilterServices {
+public class ValueServices {
 
     @Autowired
     private DadosRepository dadosRepository;

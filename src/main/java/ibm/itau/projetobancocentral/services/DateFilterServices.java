@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 @AllArgsConstructor
 @Service
-public class DataFilterServices {
+public class DateFilterServices {
 
     @Autowired
     private DadosRepository dadosRepository;
