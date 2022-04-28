@@ -12,8 +12,13 @@ O projeto foi construído com as technologias:
     Git
     MySQL workBench
     PostMan
+    ThymeLeaf
+    Docker
+    JUnit
+    Mockito
+    
   
  
 A api pública do Banco Central, na url: https://api.bcb.gov.br/dados/serie/bcdata.sgs.4505/dados?formato=json,
-foi consumida, transformada em objetos do tipo "Dados"(Long id, LocalDate data, BigDecimal valor) que foram enviados para a database local MySQL.
+foi consumida, transformada em objetos do tipo "Dados"(Long id, LocalDate data, double valor) que foram enviados para a database local MySQL.
 
