@@ -34,9 +34,9 @@ class DadosRepositoryImplTest {
         testRepository.save(dados);
         //when
         int year = LocalDate.now().getYear();
-        Dados dados1 = testRepository.findByYear(year).get(0);
+        Dados d1 = testRepository.findByYear(year).get(0);
         //then
-        assertEquals(dados, dados1);
+        assertEquals(dados, d1);
     }
 
     @Test
@@ -46,9 +46,9 @@ class DadosRepositoryImplTest {
         testRepository.save(dados);
         //when
         int day = LocalDate.now().getDayOfMonth();
-        Dados dados1 = testRepository.findByDay(day).get(0);
+        Dados d1 = testRepository.findByDay(day).get(0);
         //then
-        assertEquals(dados, dados1);
+        assertEquals(dados, d1);
 
     }
 
@@ -60,9 +60,9 @@ class DadosRepositoryImplTest {
         testRepository.save(dados);
         //when
         String month = LocalDate.now().getMonth().toString();
-        Dados dados1 = testRepository.findByMonth(month).get(0);
+        Dados d1 = testRepository.findByMonth(month).get(0);
         //then
-        assertEquals(dados, dados1);
+        assertEquals(dados, d1);
     }
 
     @Test
@@ -70,14 +70,14 @@ class DadosRepositoryImplTest {
 
         //given
         Dados dados = new Dados(LocalDate.now(), 1.0);
-        Dados dados1 = new Dados(LocalDate.now(), 2.0);
+        Dados d1 = new Dados(LocalDate.now(), 2.0);
         testRepository.save(dados);
-        testRepository.save(dados1);
+        testRepository.save(d1);
         //when
         double value = 1.5;
         Dados dados2 = testRepository.findAboveValue(value).get(0);
         //then
-        assertEquals(dados1, dados2);
+        assertEquals(d1, dados2);
     }
 
     @Test
@@ -85,9 +85,9 @@ class DadosRepositoryImplTest {
 
         //given
         Dados dados = new Dados(LocalDate.now(), 1.0);
-        Dados dados1 = new Dados(LocalDate.now(), 2.0);
+        Dados d1 = new Dados(LocalDate.now(), 2.0);
         testRepository.save(dados);
-        testRepository.save(dados1);
+        testRepository.save(d1);
         //when
         double value = 1.5;
         Dados dados2 = testRepository.findBelowValue(value).get(0);
@@ -101,13 +101,13 @@ class DadosRepositoryImplTest {
 
         //given
         Dados dados = new Dados(LocalDate.of(2020,01,01), 1.0);
-        Dados dados1 = new Dados(LocalDate.of(2020,01,01), 2.0);
+        Dados d1 = new Dados(LocalDate.of(2020,01,01), 2.0);
         Dados dados2 = new Dados(LocalDate.of(2020,01,01), 2.0);
         Dados dados3 = new Dados(LocalDate.of(2021,01,01), 1.0);
         Dados dados4 = new Dados(LocalDate.of(2021,01,01), 2.0);
         Dados dados5 = new Dados(LocalDate.of(2021,01,01), 2.0);
         testRepository.save(dados);
-        testRepository.save(dados1);
+        testRepository.save(d1);
         testRepository.save(dados2);
         testRepository.save(dados3);
         testRepository.save(dados4);
@@ -125,13 +125,13 @@ class DadosRepositoryImplTest {
 
         //given
         Dados dados = new Dados(LocalDate.of(2020,01,01), 1.0);
-        Dados dados1 = new Dados(LocalDate.of(2020,01,01), 2.0);
+        Dados d1 = new Dados(LocalDate.of(2020,01,01), 2.0);
         Dados dados2 = new Dados(LocalDate.of(2020,01,01), 2.0);
         Dados dados3 = new Dados(LocalDate.of(2021,01,01), 1.0);
         Dados dados4 = new Dados(LocalDate.of(2021,01,01), 2.0);
         Dados dados5 = new Dados(LocalDate.of(2021,01,01), 2.0);
         testRepository.save(dados);
-        testRepository.save(dados1);
+        testRepository.save(d1);
         testRepository.save(dados2);
         testRepository.save(dados3);
         testRepository.save(dados4);

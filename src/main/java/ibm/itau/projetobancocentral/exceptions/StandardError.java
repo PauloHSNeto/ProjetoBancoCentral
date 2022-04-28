@@ -1,4 +1,4 @@
 package ibm.itau.projetobancocentral.exceptions;
 
-public class DadosException {
+public class StandardError {
 }

@@ -36,12 +36,12 @@ public class ValueController {
         return ResponseEntity.ok(dados);
     }
     @GetMapping(value = "/below-average/year/{year}/")
-    public ResponseEntity<List<Dados>> getBelowAverageMonth(@PathVariable("year") int year) {
+    public ResponseEntity<List<Dados>> getBelowAverageYear(@PathVariable("year") int year) {
         List<Dados> dados = valueServices.findBelowYearAverage(year);
         return ResponseEntity.ok(dados);
     }
     @GetMapping(value = "/above-average/year/{year}/")
-    public ResponseEntity<List<Dados>> getAboveAverageMonth(@PathVariable("year") int year) {
+    public ResponseEntity<List<Dados>> getAboveAverageYear(@PathVariable("year") int year) {
         List<Dados> dados = valueServices.findAboveYearAverage(year);
         return ResponseEntity.ok(dados);
     }
@@ -51,10 +51,9 @@ public class ValueController {
         List<Dados> dados = dateFilterServices.findByYear(year);
         double media = valueServices.mediaByYear(year);
         double totalDoAno = valueServices.totalDoAno(year);
-        String body ="Total de Dívida Líquida do Setor Público (% PIB) : " + totalDoAno +"\n"
+        String body ="Total de Dívida Líquida do Setor Público (% PIB) : " + String.format("%.2f",totalDoAno) +"\n"
                 + "Total de dados do ano " + year + ": " + dados.size() +"\n"
-            + "Media de Dívida Líquida do Setor Público (% PIB) do ano " + year + ": " + media+"\n";
-
+            + "Media de Dívida Líquida do Setor Público (% PIB) do ano " + year + ": " + String.format("%.2f",media)+"\n";
         return ResponseEntity.ok(body);
     }
 
@@ -63,10 +62,9 @@ public class ValueController {
         List<Dados> dados = crudServices.getAllDados();
         double media = valueServices.media();
         double total = valueServices.total();
-        String body = "Total de Dívida Líquida do Setor Público (% PIB) : " + total +"\n"
-                + "Total de dados do ano : " + dados.size()+"\n"
-                + "Media de Dívida Líquida do Setor Público (% PIB) : " + media +"\n";
-
+        String body = "Total de Dívida Líquida do Setor Público (% PIB) : " + String.format("%.2f",total) +"\n"
+                + "Total de dados : " + dados.size()+"\n"
+                + "Media de Dívida Líquida do Setor Público (% PIB) : " + String.format("%.2f",media) +"\n";
         return ResponseEntity.ok(body);
     }
 

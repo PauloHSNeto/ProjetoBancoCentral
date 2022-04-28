@@ -38,32 +38,47 @@ class ValueServicesTest {
 
     @Test
     void findByValorAboveTest() {
+        //given
+        Dados d = new Dados(LocalDate.of(2000,1,1), 2);
+        List<Dados> dados = new ArrayList<>();
+        dados.add(d);
         //when
-        valueServices.findByValorAbove(1);
+        when(mockRepository.findAboveValue(1)).thenReturn(dados);
+        List<Dados> result = valueServices.findByValorAbove(1);
         //then
-        verify(mockRepository).findAboveValue(1);
+        assertNotNull(result);
+        assertFalse(result.isEmpty());
+        assertEquals(1,result.size());
+        assertEquals(d, result.get(0));
     }
 
 
     @Test
-    void findByValorBellowTest() {
+    void findByValorBelowTest() {
+        //given
+        Dados d = new Dados(LocalDate.of(2000,1,1), 2);
+        List<Dados> dados = new ArrayList<>();
+        dados.add(d);
         //when
-        valueServices.findByValorBellow(1);
+        when(mockRepository.findBelowValue(3)).thenReturn(dados);
+        List<Dados> result = valueServices.findByValorBelow(3);
         //then
-        verify(mockRepository).findBelowValue(1);
-
+        assertNotNull(result);
+        assertFalse(result.isEmpty());
+        assertEquals(1,result.size());
+        assertEquals(d, result.get(0));
     }
 
     @Test
     void findAboveYearAverageTest() {
         //given
-        Dados dado1 = new Dados(LocalDate.of(2000,1,1), 1);
-        Dados dados2 = new Dados(LocalDate.of(2000,1,1), 2);
+        Dados d1 = new Dados(LocalDate.of(2000,1,1), 1);
+        Dados d2 = new Dados(LocalDate.of(2000,1,1), 2);
         List<Dados> dados = new ArrayList<>();
         List<Dados> dadosFiltrado = new ArrayList<>();
-        dados.add(dado1);
-        dados.add(dados2);
-        dadosFiltrado.add(dados2);
+        dados.add(d1);
+        dados.add(d2);
+        dadosFiltrado.add(d2);
         //when
         when(mockRepository.findByYear(eq(2000))).thenReturn(dados);
         when(mockRepository.findByYearAboveValue(eq(2000),eq(1.5d))).thenReturn(dadosFiltrado);
@@ -81,18 +96,18 @@ class ValueServicesTest {
     void findBelowYearAverageTest() {
 
         //given
-        Dados dado1 = new Dados(LocalDate.of(2000,1,1), 1);
-        Dados dados2 = new Dados(LocalDate.of(2000,1,1), 2);
-        Dados dados3 = new Dados(LocalDate.of(2001,1,1), 4);
+        Dados d1 = new Dados(LocalDate.of(2000,1,1), 1);
+        Dados d2 = new Dados(LocalDate.of(2000,1,1), 2);
+        Dados d3 = new Dados(LocalDate.of(2001,1,1), 4);
         List<Dados> dados = new ArrayList<>();
         List<Dados> dadosFiltrados = new ArrayList<>();
         List<Dados> dadosFiltrado2 = new  ArrayList<>();
-        dados.add(dado1);
-        dados.add(dados2);
-        dados.add(dados3);
-        dadosFiltrados.add(dado1);
-        dadosFiltrados.add(dados2);
-        dadosFiltrado2.add(dado1);
+        dados.add(d1);
+        dados.add(d2);
+        dados.add(d3);
+        dadosFiltrados.add(d1);
+        dadosFiltrados.add(d2);
+        dadosFiltrado2.add(d1);
         //when
         when(mockRepository.findByYear(eq(2000))).thenReturn(dadosFiltrados);
         when(mockRepository.findByYearBelowValue(eq(2000),eq(1.5d))).thenReturn(dadosFiltrado2);
@@ -156,14 +171,14 @@ class ValueServicesTest {
     @Test
     void totalTest() {
         //given
-        Dados dado1 = new Dados(LocalDate.now(), 1);
-        Dados dados2 = new Dados(LocalDate.now(), 2);
-        Dados dados3 = new Dados(LocalDate.now(), 3);
+        Dados d1 = new Dados(LocalDate.now(), 1);
+        Dados d2 = new Dados(LocalDate.now(), 2);
+        Dados d3 = new Dados(LocalDate.now(), 3);
         List<Dados> dados = new ArrayList<>();
 
-        dados.add(dado1);
-        dados.add(dados2);
-        dados.add(dados3);
+        dados.add(d1);
+        dados.add(d2);
+        dados.add(d3);
 
         when(mockRepository.findAll()).thenReturn(dados);
         //when
@@ -177,13 +192,13 @@ class ValueServicesTest {
     void totalDoAnoTest() {
 
         //given
-        Dados dado1 = new Dados(LocalDate.of(2000,1,1), 1);
-        Dados dados2 = new Dados(LocalDate.of(2000,1,1), 2);
-        Dados dados3 = new Dados(LocalDate.of(2001,1,1), 4);
+        Dados d1 = new Dados(LocalDate.of(2000,1,1), 1);
+        Dados d2 = new Dados(LocalDate.of(2000,1,1), 2);
+        Dados d3 = new Dados(LocalDate.of(2001,1,1), 4);
         List<Dados> dados = new ArrayList<>();
 
-        dados.add(dado1);
-        dados.add(dados2);
+        dados.add(d1);
+        dados.add(d2);
 
         when(mockRepository.findByYear(2000)).thenReturn(dados);
         //when
@@ -197,14 +212,14 @@ class ValueServicesTest {
     void mediaTest() {
         //given
 
-        Dados dado1 = new Dados(LocalDate.of(2000,1,1), 1);
-        Dados dados2 = new Dados(LocalDate.of(2000,1,1), 2);
-        Dados dados3 = new Dados(LocalDate.of(2001,1,1), 6);
+        Dados d1 = new Dados(LocalDate.of(2000,1,1), 1);
+        Dados d2 = new Dados(LocalDate.of(2000,1,1), 2);
+        Dados d3 = new Dados(LocalDate.of(2001,1,1), 6);
         List<Dados> dados = new ArrayList<>();
 
-        dados.add(dado1);
-        dados.add(dados2);
-        dados.add(dados3);
+        dados.add(d1);
+        dados.add(d2);
+        dados.add(d3);
 
         when(mockRepository.findAll()).thenReturn(dados);
         //when
@@ -219,13 +234,13 @@ class ValueServicesTest {
     void mediaByYearTest() {
 
         //given
-        Dados dado1 = new Dados(LocalDate.of(2000,1,1), 1);
-        Dados dados2 = new Dados(LocalDate.of(2000,1,1), 2);
-        Dados dados3 = new Dados(LocalDate.of(2001,1,1), 6);
+        Dados d1 = new Dados(LocalDate.of(2000,1,1), 1);
+        Dados d2 = new Dados(LocalDate.of(2000,1,1), 2);
+        Dados d3 = new Dados(LocalDate.of(2001,1,1), 6);
         List<Dados> dados = new ArrayList<>();
 
-        dados.add(dado1);
-        dados.add(dados2);
+        dados.add(d1);
+        dados.add(d2);
 
         when(mockRepository.findByYear(2000)).thenReturn(dados);
         //when

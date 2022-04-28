@@ -15,7 +15,7 @@ public class ValueServices {
     public List<Dados> findByValorAbove(double valor) {
         return dadosRepository.findAboveValue(valor);
     }
-    public List<Dados> findByValorBellow(double valor) {
+    public List<Dados> findByValorBelow(double valor) {
         return dadosRepository.findBelowValue(valor);
     }
 

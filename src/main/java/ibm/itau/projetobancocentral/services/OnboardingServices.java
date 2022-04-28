@@ -11,15 +11,17 @@ import java.util.Arrays;
 @AllArgsConstructor
 @Service
 public class OnboardingServices {
+
     @Autowired
     private RestTemplate restTemplate;
     @Autowired
     private DadosRepository dadosRepository;
 
-    public void onboarding(String url){
+    public String onboarding(String url){
 
         Dados[] arraysDeDados = restTemplate.getForObject(url, Dados[].class);
         dadosRepository.saveAll(Arrays.asList(arraysDeDados));
+        return "Success!";
     }
     public void deleteOnboarding(){
         dadosRepository.deleteAll();

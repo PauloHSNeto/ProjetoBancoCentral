@@ -1,6 +1,7 @@
 package ibm.itau.projetobancocentral.controllers;
 import ibm.itau.projetobancocentral.entities.Dados;
 import ibm.itau.projetobancocentral.services.CrudServices;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +13,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping
+@AllArgsConstructor
 public class CrudController {
 
     @Autowired
@@ -20,8 +22,8 @@ public class CrudController {
 
     @GetMapping(value ="/dados")
     public ResponseEntity<List<Dados>> getDados() {
-        List<Dados> dados = crudServices.getAllDados();
-        return ResponseEntity.ok(dados);
+        List<Dados> dadosList = crudServices.getAllDados();
+        return ResponseEntity.ok(dadosList);
     }
     //Get dados by id
     @GetMapping(value = "/{id}")
