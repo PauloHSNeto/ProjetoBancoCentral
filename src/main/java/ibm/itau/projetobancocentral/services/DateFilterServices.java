@@ -13,6 +13,7 @@ public class DateFilterServices {
 
     @Autowired
     private DadosRepository dadosRepository;
+
     public List<Dados> findByDay(int day) {return dadosRepository.findByDay(day);}
     public List<Dados> findByYear(int year) {
         return dadosRepository.findByYear(year);

@@ -14,7 +14,8 @@ import static org.junit.jupiter.api.Assertions.*;
 @DataJpaTest
 class DadosRepositoryImplTest {
 
-    @Autowired
+    private DadosRepositoryImpl dadosRepository;
+
     private DadosRepository testRepository;
 
 
@@ -54,7 +55,6 @@ class DadosRepositoryImplTest {
 
     @Test
     void findByMonthTest() {
-
         //given
         Dados dados = new Dados(LocalDate.now(), 1.0);
         testRepository.save(dados);
@@ -64,10 +64,8 @@ class DadosRepositoryImplTest {
         //then
         assertEquals(dados, d1);
     }
-
     @Test
     void findAboveValueTest() {
-
         //given
         Dados dados = new Dados(LocalDate.now(), 1.0);
         Dados d1 = new Dados(LocalDate.now(), 2.0);
@@ -79,10 +77,8 @@ class DadosRepositoryImplTest {
         //then
         assertEquals(d1, dados2);
     }
-
     @Test
     void findBelowValueTest() {
-
         //given
         Dados dados = new Dados(LocalDate.now(), 1.0);
         Dados d1 = new Dados(LocalDate.now(), 2.0);
@@ -94,11 +90,8 @@ class DadosRepositoryImplTest {
         //then
         assertEquals(dados, dados2);
     }
-
-
     @Test
     void findByYearAboveValueTest() {
-
         //given
         Dados dados = new Dados(LocalDate.of(2020,01,01), 1.0);
         Dados d1 = new Dados(LocalDate.of(2020,01,01), 2.0);
@@ -118,11 +111,8 @@ class DadosRepositoryImplTest {
         //then
         assertEquals(2, list.size());
     }
-
     @Test
     void findByYearBelowValueTest() {
-
-
         //given
         Dados dados = new Dados(LocalDate.of(2020,01,01), 1.0);
         Dados d1 = new Dados(LocalDate.of(2020,01,01), 2.0);

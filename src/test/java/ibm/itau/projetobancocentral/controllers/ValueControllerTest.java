@@ -23,7 +23,6 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class ValueControllerTest {
-
     @Mock
     private ValueServices mockService;
     @Mock
@@ -34,15 +33,6 @@ class ValueControllerTest {
     @InjectMocks
     private ValueController valueController;
 
-    @BeforeEach
-    void setUp() {
-//        valueController = new ValueController(mockService);
-    }
-
-    @AfterEach
-    void tearDown() {
-    }
-
     @Test
     void getBelowAverageTotal() {
         //when
@@ -50,7 +40,6 @@ class ValueControllerTest {
         //then
         verify(mockService).findBelowTotalAverage();
     }
-
     @Test
     void getAboveAverageTotal() {
         //when
@@ -58,7 +47,6 @@ class ValueControllerTest {
         //then
         verify(mockService).findAboveTotalAverage();
     }
-
     @Test
     void getBelowAverageYear() {
         //when
@@ -66,7 +54,6 @@ class ValueControllerTest {
         //then
         verify(mockService).findBelowYearAverage(2000);
     }
-
     @Test
     void getAboveAverageYear() {
         //when
@@ -74,7 +61,6 @@ class ValueControllerTest {
         //then
         verify(mockService).findAboveYearAverage(2000);
     }
-
     @Test
     void getAverageByYear() {
         //given
@@ -95,7 +81,6 @@ class ValueControllerTest {
         verify(mockService).mediaByYear(2000);
         verify(mockService).totalDoAno(2000);
         verify(dateFilterServices).findByYear(2000);
-
     }
     @Test
     void getTotal() {
@@ -117,7 +102,5 @@ class ValueControllerTest {
         verify(mockService).media();
         verify(mockService).total();
         verify(crudServices).getAllDados();
-
-
     }
 }

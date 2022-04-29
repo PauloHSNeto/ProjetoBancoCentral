@@ -33,13 +33,10 @@ class CrudControllerTest {
     @InjectMocks
     private CrudController controller;
 
-
     @BeforeEach
     void setUp() {
         controller = new CrudController(mockService);
     }
-
-
     @Test
     void getDadosTest() {
         //when
@@ -47,9 +44,6 @@ class CrudControllerTest {
         //then
         verify(mockService).getAllDados();
     }
-
-
-
     @Test
     void getDadosByIdTest() {
         //when
@@ -57,8 +51,6 @@ class CrudControllerTest {
         //then
         verify(mockService).findById(1L);
     }
-
-
     @Test
     void postDadosTest() {
         //given
@@ -73,7 +65,6 @@ class CrudControllerTest {
         //then
         assertEquals(expected,actual);
     }
-
     @Test
     void deleteDadosTest() {
         //when
@@ -81,7 +72,6 @@ class CrudControllerTest {
         //then
         verify(mockService).deleteById(1L);
     }
-
     @Test
     void putDadosTest() {
         //given

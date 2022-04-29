@@ -27,16 +27,14 @@ class OnboardingServicesTest {
 
     @Mock
     private RestTemplate testTemplate;
-
     @Mock
     private DadosRepository mockRepository;
-
     @InjectMocks
     private OnboardingServices onboardingServices;
 
     @BeforeEach
     void setUp() {
-        MockitoAnnotations.initMocks(this);
+        MockitoAnnotations.openMocks(this);
     }
 
     @Test

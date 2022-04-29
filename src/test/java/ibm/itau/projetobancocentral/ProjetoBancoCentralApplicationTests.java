@@ -13,21 +13,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @SpringBootTest
 class ProjetoBancoCentralApplicationTests {
 
-    @Test
-    void contextLoads() {
-        //given
-        String name = "Paulo Henrique da Silva Neto";
-        int id = 123456789;
-        //when
-        Map<String, Object> map = new HashMap<>();
-        map.put("name", name);
-        map.put("id", id);
-        //then
-        assertEquals(name, map.get("name"));
-        assertEquals(id, map.get("id"));
+
 
 
 
     }
-
-}

@@ -32,7 +32,6 @@ public class ValueServices {
         return dadosRepository.findAboveValue(media());
     }
 
-
     public double total() {
         double total = 0;
         for (Dados d:  dadosRepository.findAll()) {

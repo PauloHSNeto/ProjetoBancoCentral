@@ -37,7 +37,4 @@ public class DateFilterController {
         List<Dados> dados = dateFilterServices.findByYear(year);
         return ResponseEntity.ok(dados);
     }
-
-
-
 }

@@ -6,6 +6,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -20,12 +21,10 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 class ValueServicesTest {
 
-
     @Mock
     private DadosRepository mockRepository;
-
+    @InjectMocks
     private ValueServices valueServices;
-
 
     @BeforeEach
     void setUp() {
@@ -51,8 +50,6 @@ class ValueServicesTest {
         assertEquals(1,result.size());
         assertEquals(d, result.get(0));
     }
-
-
     @Test
     void findByValorBelowTest() {
         //given

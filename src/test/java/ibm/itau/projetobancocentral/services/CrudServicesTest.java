@@ -21,14 +21,12 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class CrudServicesTest {
-
     @Mock
     private Dados dado;
     @Mock
     private DadosRepository mockRepository;
-    @Autowired
+    @InjectMocks
     private CrudServices testServices;
-
     @BeforeEach
     void setUp() {
         testServices = new CrudServices(mockRepository);
@@ -41,7 +39,6 @@ class CrudServicesTest {
         //then
         verify(mockRepository).findAll();
     }
-
     @Test
     void findByIdTest() {
         Dados d1 =new Dados();
@@ -52,7 +49,6 @@ class CrudServicesTest {
         verify(mockRepository).findById(1L);
         assertEquals(d1,dResult);
     }
-
     @Test
     void saveTest() {
         //given
@@ -70,8 +66,6 @@ class CrudServicesTest {
 
         assertEquals(capturedDados,dado);
     }
-
-
     @Test
     void deleteByIdTest() {
         //given
@@ -79,7 +73,6 @@ class CrudServicesTest {
         //then
         verify(mockRepository, times(1)).deleteById(1L);
     }
-
     @Test
     void updateTest() {
         //given

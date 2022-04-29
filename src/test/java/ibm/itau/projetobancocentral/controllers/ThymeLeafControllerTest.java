@@ -40,13 +40,11 @@ class ThymeLeafControllerTest {
     void index() {
         //given
         Model model = mock(Model.class);
-
         //when
         when(mockService.getAllDados()).thenReturn(new ArrayList<Dados>());
         String result = thymeLeafController.index(model);
         //then
         verify(mockService, times(1)).getAllDados();
         assertEquals("index", result);
-
     }
 }

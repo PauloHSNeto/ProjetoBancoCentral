@@ -9,7 +9,6 @@ import org.springframework.web.client.RestTemplate;
 public class ProjetoBancoCentralApplication {
     public static void main(String[] args) {SpringApplication.run(ProjetoBancoCentralApplication.class, args);}
 
-
     @Bean
     public RestTemplate restTemplate() {
         return new RestTemplate();

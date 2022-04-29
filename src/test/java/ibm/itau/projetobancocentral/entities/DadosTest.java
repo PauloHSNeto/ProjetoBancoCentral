@@ -9,7 +9,6 @@ import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class DadosTest {
-
     @Test
     void constructorWithAllArgsTest() {
         //given
@@ -19,7 +18,6 @@ class DadosTest {
         //then
         assertEquals(dados, dados2);
     }
-
     @Test
     void constructorWithDataandValorTest() {
         //given
@@ -29,7 +27,6 @@ class DadosTest {
         //then
         assertEquals(dados, dados2);
     }
-
     @Test
     void getIdTest() {
         //given
@@ -40,7 +37,6 @@ class DadosTest {
         //then
         assertEquals(1L, d.getId());
     }
-
     @Test
     void getDataTest() {
         //given
@@ -51,7 +47,6 @@ class DadosTest {
         //then
         assertEquals(date, d.getData());
     }
-
     @Test
     void getValorTest() {
         //given
@@ -62,7 +57,6 @@ class DadosTest {
         //then
         assertEquals(valor, d.getValor());
     }
-
     @Test
     void setIdTest() {
         //given
@@ -73,7 +67,6 @@ class DadosTest {
         //then
         assertEquals(1L, d.getId());
     }
-
     @Test
     void setDataTest()  {
         //given

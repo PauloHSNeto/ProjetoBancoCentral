@@ -15,7 +15,6 @@ public class OnboardingController {
 
     @PostMapping
     public ResponseEntity<String> onboarding(@RequestBody String url) {
-
         onboardingServices.onboarding(url);
         return ResponseEntity.ok("Onboarding realizado com sucesso!");
     }
@@ -24,5 +23,4 @@ public class OnboardingController {
         onboardingServices.deleteOnboarding();
         return ResponseEntity.ok("Deletado");
     }
-
 }

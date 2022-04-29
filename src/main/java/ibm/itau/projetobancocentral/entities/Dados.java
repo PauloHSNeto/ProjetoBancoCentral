@@ -29,4 +29,3 @@ public class Dados implements java.io.Serializable {
         this.valor = valor;
     }
 }
-

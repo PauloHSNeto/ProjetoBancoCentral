@@ -67,10 +67,4 @@ public class ValueController {
                 + "Media de Dívida Líquida do Setor Público (% PIB) : " + String.format("%.2f",media) +"\n";
         return ResponseEntity.ok(body);
     }
-
-
-
-
-
-
 }

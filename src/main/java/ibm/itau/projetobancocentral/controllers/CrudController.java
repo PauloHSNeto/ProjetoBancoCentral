@@ -19,13 +19,11 @@ public class CrudController {
     @Autowired
     private CrudServices crudServices;
 
-
     @GetMapping(value ="/dados")
     public ResponseEntity<List<Dados>> getDados() {
         List<Dados> dadosList = crudServices.getAllDados();
         return ResponseEntity.ok(dadosList);
     }
-    //Get dados by id
     @GetMapping(value = "/{id}")
     public ResponseEntity<Dados> getDadosById(@PathVariable Long id) {
         Dados dados = crudServices.findById(id);

@@ -12,6 +12,8 @@ import java.util.List;
 public class DadosRepositoryImpl {
 
 
+
+
     @Autowired
     @Lazy
     private DadosRepository dadosRepository;
@@ -97,4 +99,44 @@ public class DadosRepositoryImpl {
         }
         return listaFiltrada;
     }
+//    public Dados findByMaxValue(){
+//        List<Dados> list = dadosRepository.findAll();
+//        Dados max = list.get(0);
+//        for (Dados d : list){
+//            if (d.getValor()>max.getValor()){
+//                max = d;
+//            }
+//        }
+//        return max;
+//    }
+//    public Dados findByMinValue(){
+//        List<Dados> list = dadosRepository.findAll();
+//        Dados min = list.get(0);
+//        for (Dados d : list){
+//            if (d.getValor()<min.getValor()){
+//                min = d;
+//            }
+//        }
+//        return min;
+//    }
+//    public Dados findByMaxValueOfYear(int year){
+//        List<Dados> list = dadosRepository.findByYear(year);
+//        Dados max = list.get(0);
+//        for (Dados d : list){
+//            if (d.getValor()>max.getValor()){
+//                max = d;
+//            }
+//        }
+//        return max;
+//    }
+//    public Dados findByMinValueofYear(int year){
+//        List<Dados> list = dadosRepository.findByYear(year);
+//        Dados min = list.get(0);
+//        for (Dados d : list){
+//            if (d.getValor()<min.getValor()){
+//                min = d;
+//            }
+//        }
+//        return min;
+//    }
 }
