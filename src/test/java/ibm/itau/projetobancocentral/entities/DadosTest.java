@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
-@SpringBootTest
+
 class DadosTest {
     @Test
     void constructorWithAllArgsTest() {
@@ -105,15 +105,6 @@ class DadosTest {
         Dados d2 = new Dados();
         //when
         assertTrue(d.canEqual(d2));
-    }
-
-    @Test
-    void testHashCodeTest() {
-        //given
-        Dados d = new Dados(LocalDate.now(),100);
-        Dados d2 = new Dados(LocalDate.now(),100);
-        //then
-        assertEquals(d.hashCode(), d2.hashCode());
     }
 
     @Test

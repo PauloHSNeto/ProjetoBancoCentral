@@ -18,11 +18,11 @@ public interface DadosRepository extends JpaRepository<Dados, Long> {
     List<Dados> findByYearAboveValue(int year, double value);
     List<Dados> findByYearBelowValue(int year, double value);
 
-//    Dados findByMaxValue();
-//    Dados findByMinValue();
+//    public Dados findByMaxValue();
+//    public Dados findByMinValue();
 //
-//    Dados findByMaxValueOfYear(int year);
-//    Dados findByMinValueOfYear(int year);
+//    public Dados findByMaxValueOfYear(int year);
+//    public Dados findByMinValueOfYear(int year);
 
 
 }
