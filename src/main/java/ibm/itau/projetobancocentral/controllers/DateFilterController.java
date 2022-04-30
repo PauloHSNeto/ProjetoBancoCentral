@@ -1,8 +1,6 @@
 package ibm.itau.projetobancocentral.controllers;
 
 import ibm.itau.projetobancocentral.entities.Dados;
-import ibm.itau.projetobancocentral.repositories.DadosRepository;
-import ibm.itau.projetobancocentral.services.CrudServices;
 import ibm.itau.projetobancocentral.services.DateFilterServices;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @RequestMapping("/dateFilters")
@@ -35,6 +35,15 @@ public class DateFilterController {
     @GetMapping(value = "/year/{year}")
     public ResponseEntity<List<Dados>> getDadosByAno(@PathVariable int year) {
         List<Dados> dados = dateFilterServices.findByYear(year);
+        return ResponseEntity.ok(dados);
+    }
+    @GetMapping(value = "/between/{date1}/{date2}")
+    public ResponseEntity<List<Dados>> findDadosBetweenDates(@PathVariable String date1,@PathVariable String date2) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate localDate1 = LocalDate.parse(date1, formatter);
+        LocalDate localDate2 = LocalDate.parse(date2, formatter);
+
+        List<Dados> dados = dateFilterServices.findDadosBetweenDates(localDate1, localDate2);
         return ResponseEntity.ok(dados);
     }
 }

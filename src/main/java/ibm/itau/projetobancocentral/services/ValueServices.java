@@ -1,9 +1,11 @@
 package ibm.itau.projetobancocentral.services;
+
 import ibm.itau.projetobancocentral.entities.Dados;
 import ibm.itau.projetobancocentral.repositories.DadosRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 @AllArgsConstructor
 @Service
@@ -39,9 +41,6 @@ public class ValueServices {
         }
         return total;
     }
-
-
-
     public double totalDoAno(int year) {
         double total = 0;
         for (Dados d: dadosRepository.findByYear(year)) {
@@ -57,4 +56,45 @@ public class ValueServices {
         List<Dados> list = dadosRepository.findByYear(year);
         return totalDoAno(year)/list.size();
     }
+    public Dados findByMaxValue(){
+        List<Dados> list = dadosRepository.findAll();
+        Dados max = list.get(0);
+        for (Dados d : list){
+            if (d.getValor()>max.getValor()){
+                max = d;
+            }
+        }
+        return max;
+    }
+    public Dados findByMinValue(){
+        List<Dados> list = dadosRepository.findAll();
+        Dados min = list.get(0);
+        for (Dados d : list){
+            if (d.getValor()<min.getValor()){
+                min = d;
+            }
+        }
+        return min;
+    }
+    public Dados findByMaxValueOfYear(int year){
+        List<Dados> list = dadosRepository.findByYear(year);
+        Dados max = list.get(0);
+        for (Dados d : list){
+            if (d.getValor()>max.getValor()){
+                max = d;
+            }
+        }
+        return max;
+    }
+    public Dados findByMinValueofYear(int year){
+        List<Dados> list = dadosRepository.findByYear(year);
+        Dados min = list.get(0);
+        for (Dados d : list){
+            if (d.getValor()<min.getValor()){
+                min = d;
+            }
+        }
+        return min;
+    }
+
 }
