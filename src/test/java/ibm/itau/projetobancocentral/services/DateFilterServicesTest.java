@@ -1,14 +1,23 @@
 package ibm.itau.projetobancocentral.services;
 
+import ibm.itau.projetobancocentral.entities.Dados;
 import ibm.itau.projetobancocentral.repositories.DadosRepository;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class DateFilterServicesTest {
@@ -45,5 +54,30 @@ class DateFilterServicesTest {
         dateFilterServices.findByMonth("March");
         //then
         verify(mockRepository).findByMonth("March");
+    }
+
+    @Test
+    @DisplayName("Teste de filtro de entre datas")
+
+    void findDadosBetweenDatesTest() {
+        //given
+        LocalDate startDate = LocalDate.of(2002, 3, 1);
+        LocalDate endDate = LocalDate.of(2005, 3, 31);
+        List<Dados> dados = new ArrayList<>();
+        dados.add(new Dados(LocalDate.of(2001,01,11),1.1));
+        dados.add(new Dados(LocalDate.of(2002,02,12),1.2));
+        dados.add(new Dados(LocalDate.of(2003,03,13),1.3));
+        dados.add(new Dados(LocalDate.of(2004,04,14),1.4));
+        dados.add(new Dados(LocalDate.of(2005,05,15),1.5));
+        List<Dados> expected = new ArrayList<>();
+        expected.add(new Dados(LocalDate.of(2003,03,13),1.3));
+        expected.add(new Dados(LocalDate.of(2004,04,14),1.4));
+        //when
+        when(mockRepository.findAll()).thenReturn(dados);
+        List<Dados> result = dateFilterServices.findDadosBetweenDates(startDate, endDate);
+        //then
+        System.out.println(result);
+        System.out.println(expected);
+        assertEquals(expected, result);
     }
 }
