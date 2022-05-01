@@ -57,4 +57,13 @@ public class ValueServices {
         List<Dados> list = dadosRepository.findByYear(year);
         return totalDoAno(year)/list.size();
     }
+
+    public void updateDifference() {
+        List<Dados> list = dadosRepository.findAll();
+        list.sort((o1, o2) -> o1.getData().compareTo(o2.getData()));
+        for (int i = 1; i < list.size()-1; i++) {
+                list.get(i).setDifference(list.get(i).getValor() - list.get(i-1).getValor());
+                dadosRepository.save(list.get(i));
+            }
+        }
 }

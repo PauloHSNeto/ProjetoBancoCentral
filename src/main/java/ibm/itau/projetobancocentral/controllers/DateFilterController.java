@@ -7,10 +7,7 @@ import ibm.itau.projetobancocentral.services.DateFilterServices;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -35,6 +32,11 @@ public class DateFilterController {
     @GetMapping(value = "/year/{year}")
     public ResponseEntity<List<Dados>> getDadosByAno(@PathVariable int year) {
         List<Dados> dados = dateFilterServices.findByYear(year);
+        return ResponseEntity.ok(dados);
+    }
+    @GetMapping(value ="/between")
+    public ResponseEntity<List<Dados>> getDadosBetween(@RequestParam String startDate, @RequestParam String endDate) {
+        List<Dados> dados = dateFilterServices.findBetweenDates(startDate, endDate);
         return ResponseEntity.ok(dados);
     }
 }

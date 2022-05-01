@@ -40,7 +40,7 @@ class CrudControllerTest {
     @Test
     void getDadosTest() {
         //when
-        controller.getDados();
+        controller.getDados("data");
         //then
         verify(mockService).getAllDados();
     }

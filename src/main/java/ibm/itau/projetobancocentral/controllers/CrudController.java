@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -20,8 +21,11 @@ public class CrudController {
     private CrudServices crudServices;
 
     @GetMapping(value ="/dados")
-    public ResponseEntity<List<Dados>> getDados() {
+    public ResponseEntity<List<Dados>> getDados(@RequestParam(defaultValue = "data") String sortBy) {
         List<Dados> dadosList = crudServices.getAllDados();
+        dadosList.sort(sortBy == "valor" ?
+                Comparator.comparing(Dados::getValor):
+                Comparator.comparing(Dados::getData));
         return ResponseEntity.ok(dadosList);
     }
     @GetMapping(value = "/{id}")
@@ -48,7 +52,7 @@ public class CrudController {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate data = LocalDate.parse(map.get("data").toString(),formatter);
         double valor = (double) map.get("valor");
-        Dados dado = new Dados(id,data,valor);
+        Dados dado = new Dados(id,data,valor,0.0);
         crudServices.update(id, dado);
         return ResponseEntity.ok(dado);
     }

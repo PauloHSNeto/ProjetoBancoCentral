@@ -12,9 +12,9 @@ class DadosTest {
     @Test
     void constructorWithAllArgsTest() {
         //given
-        Dados dados = new Dados(1L,null,0.0);
+        Dados dados = new Dados(1L,null,0.0,0.0);
         //when
-        Dados dados2 = new Dados(1L,null,0.0);
+        Dados dados2 = new Dados(1L,null,0.0,0.0);
         //then
         assertEquals(dados, dados2);
     }

@@ -17,11 +17,15 @@ public class OnboardingServices {
     private RestTemplate restTemplate;
     @Autowired
     private DadosRepository dadosRepository;
+    @Autowired
+    private ValueServices valueServices;
+
 
     public String onboarding(String url){
 
         Dados[] arraysDeDados = restTemplate.getForObject(url, Dados[].class);
         dadosRepository.saveAll(Arrays.asList(arraysDeDados));
+        valueServices.updateDifference();
         return "Success!";
     }
     public void deleteOnboarding(){
