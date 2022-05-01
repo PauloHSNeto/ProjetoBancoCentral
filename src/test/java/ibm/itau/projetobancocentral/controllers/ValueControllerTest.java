@@ -4,8 +4,6 @@ import ibm.itau.projetobancocentral.entities.Dados;
 import ibm.itau.projetobancocentral.services.CrudServices;
 import ibm.itau.projetobancocentral.services.DateFilterServices;
 import ibm.itau.projetobancocentral.services.ValueServices;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -17,7 +15,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 

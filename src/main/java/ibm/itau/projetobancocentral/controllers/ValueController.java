@@ -1,7 +1,6 @@
 package ibm.itau.projetobancocentral.controllers;
 
 import ibm.itau.projetobancocentral.entities.Dados;
-import ibm.itau.projetobancocentral.repositories.DadosRepository;
 import ibm.itau.projetobancocentral.services.CrudServices;
 import ibm.itau.projetobancocentral.services.DateFilterServices;
 import ibm.itau.projetobancocentral.services.ValueServices;
@@ -13,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDate;
 import java.util.List;
 @AllArgsConstructor
 @RequestMapping("/values")
@@ -45,7 +45,6 @@ public class ValueController {
         List<Dados> dados = valueServices.findAboveYearAverage(year);
         return ResponseEntity.ok(dados);
     }
-
     @GetMapping(value = "/total/{year}")
     public ResponseEntity<String> getAverageByYear(@PathVariable int year) {
         List<Dados> dados = dateFilterServices.findByYear(year);
@@ -56,7 +55,6 @@ public class ValueController {
             + "Media de Dívida Líquida do Setor Público (% PIB) do ano " + year + ": " + String.format("%.2f",media)+"\n";
         return ResponseEntity.ok(body);
     }
-
     @GetMapping(value = "/total")
     public ResponseEntity<String> getTotal() {
         List<Dados> dados = crudServices.getAllDados();
@@ -65,6 +63,38 @@ public class ValueController {
         String body = "Total de Dívida Líquida do Setor Público (% PIB) : " + String.format("%.2f",total) +"\n"
                 + "Total de dados : " + dados.size()+"\n"
                 + "Media de Dívida Líquida do Setor Público (% PIB) : " + String.format("%.2f",media) +"\n";
+        return ResponseEntity.ok(body);
+    }
+    @GetMapping(value = "/max")
+    public ResponseEntity<String> getMax() {
+        double max = valueServices.findByMaxValue().getValor();
+        LocalDate data = valueServices.findByMaxValue().getData();
+        String body = "Maior Dívida Líquida do Setor Público (% PIB) : " + String.format("%.2f",max) +"\n"
+                                + "Data : " + data +"\n";
+        return ResponseEntity.ok(body);
+    }
+    @GetMapping(value = "/min")
+    public ResponseEntity<String> getMin() {
+        double min = valueServices.findByMinValue().getValor();
+        LocalDate data = valueServices.findByMinValue().getData();
+        String body = "Menor Dívida Líquida do Setor Público (% PIB) : " + String.format("%.2f",min) +"\n"
+                                + "Data : " + data +"\n";
+        return ResponseEntity.ok(body);
+    }
+    @GetMapping(value ="/max/{year}")
+    public ResponseEntity<String> getMaxYear(@PathVariable int year) {
+        double max = valueServices.findByMaxValueOfYear(year).getValor();
+        LocalDate data = valueServices.findByMaxValueOfYear(year).getData();
+        String body = "Maior Dívida Líquida do Setor Público (% PIB) do ano "+ year +" : " + String.format("%.2f",max) +"\n"
+                        + "Data : " + data +"\n";
+        return ResponseEntity.ok(body);
+    }
+    @GetMapping(value ="/min/{year}")
+    public ResponseEntity<String> getMinYear(@PathVariable int year) {
+        double min = valueServices.findByMinValueofYear(year).getValor();
+        LocalDate data = valueServices.findByMinValueofYear(year).getData();
+        String body = "Menor Dívida Líquida do Setor Público (% PIB) do ano "+ year +" : " + String.format("%.2f",min) +"\n"
+                        + "Data : " + data +"\n";
         return ResponseEntity.ok(body);
     }
 }

@@ -2,8 +2,8 @@ package ibm.itau.projetobancocentral.services;
 
 import ibm.itau.projetobancocentral.entities.Dados;
 import ibm.itau.projetobancocentral.repositories.DadosRepository;
-import ibm.itau.projetobancocentral.repositories.DadosRepositoryImpl;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -11,6 +11,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Arrays;
 @AllArgsConstructor
 @Service
+@NoArgsConstructor
 public class OnboardingServices {
 
     @Autowired
@@ -22,6 +23,7 @@ public class OnboardingServices {
 
 
     public String onboarding(String url){
+
 
         Dados[] arraysDeDados = restTemplate.getForObject(url, Dados[].class);
         dadosRepository.saveAll(Arrays.asList(arraysDeDados));

@@ -2,7 +2,10 @@ package ibm.itau.projetobancocentral.repositories;
 
 import ibm.itau.projetobancocentral.entities.Dados;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.stereotype.Repository;
+
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -17,12 +20,5 @@ public interface DadosRepository extends JpaRepository<Dados, Long> {
 
     List<Dados> findByYearAboveValue(int year, double value);
     List<Dados> findByYearBelowValue(int year, double value);
-
-//    public Dados findByMaxValue();
-//    public Dados findByMinValue();
-//
-//    public Dados findByMaxValueOfYear(int year);
-//    public Dados findByMinValueOfYear(int year);
-
 
 }
