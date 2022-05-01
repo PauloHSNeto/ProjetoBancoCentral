@@ -23,11 +23,14 @@ public class CrudController {
     @GetMapping(value ="/dados")
     public ResponseEntity<List<Dados>> getDados(@RequestParam(defaultValue = "data") String sortBy) {
         List<Dados> dadosList = crudServices.getAllDados();
-        dadosList.sort(sortBy == "valor" ?
-                Comparator.comparing(Dados::getValor):
-                Comparator.comparing(Dados::getData));
+        if (sortBy.equals("data")) { // ordena por data
+            dadosList.sort(Comparator.comparing(Dados::getData));
+        }else if (sortBy.equals("valor")) { // ordena por valor
+            dadosList.sort(Comparator.comparing(Dados::getValor));
+        }
         return ResponseEntity.ok(dadosList);
     }
+
     @GetMapping(value = "/{id}")
     public ResponseEntity<Dados> getDadosById(@PathVariable Long id) {
         Dados dados = crudServices.findById(id);

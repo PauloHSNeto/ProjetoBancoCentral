@@ -22,8 +22,7 @@
         <td th:text="${p.getId()}"></td>
         <td th:text="${p.getData()}"></td>
         <td th:text="${p.getValor()}"></td>
-        <td th:unless="${p == dados[0]}" th:text="${dados[dados.indexOf(p)-1].getValor-p.getValor()}"></td>
-
+        <td th:text="${p.getDifference()}"></td>
     </tr>
     </tbody>
 </table>

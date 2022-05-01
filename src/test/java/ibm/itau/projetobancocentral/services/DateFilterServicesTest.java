@@ -62,8 +62,8 @@ class DateFilterServicesTest {
 
     void findDadosBetweenDatesTest() {
         //given
-        LocalDate startDate = LocalDate.of(2002, 3, 1);
-        LocalDate endDate = LocalDate.of(2005, 3, 31);
+        String startDateString = "2002-03-01";
+        String endDateString = "2005-03-31";
         List<Dados> dados = new ArrayList<>();
         dados.add(new Dados(LocalDate.of(2001,01,11),1.1));
         dados.add(new Dados(LocalDate.of(2002,02,12),1.2));
@@ -75,7 +75,7 @@ class DateFilterServicesTest {
         expected.add(new Dados(LocalDate.of(2004,04,14),1.4));
         //when
         when(mockRepository.findAll()).thenReturn(dados);
-        List<Dados> result = dateFilterServices.findDadosBetweenDates(startDate, endDate);
+        List<Dados> result = dateFilterServices.findBetweenDates(startDateString, endDateString);
         //then
         System.out.println(result);
         System.out.println(expected);

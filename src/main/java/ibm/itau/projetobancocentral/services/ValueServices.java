@@ -4,6 +4,8 @@ import ibm.itau.projetobancocentral.repositories.DadosRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.awt.datatransfer.Clipboard;
 import java.util.List;
 @AllArgsConstructor
 @Service
@@ -39,9 +41,6 @@ public class ValueServices {
         }
         return total;
     }
-
-
-
     public double totalDoAno(int year) {
         double total = 0;
         for (Dados d: dadosRepository.findByYear(year)) {
@@ -61,9 +60,29 @@ public class ValueServices {
     public void updateDifference() {
         List<Dados> list = dadosRepository.findAll();
         list.sort((o1, o2) -> o1.getData().compareTo(o2.getData()));
-        for (int i = 1; i < list.size()-1; i++) {
+        for (int i = 1; i < list.size(); i++) {
                 list.get(i).setDifference(list.get(i).getValor() - list.get(i-1).getValor());
                 dadosRepository.save(list.get(i));
             }
         }
+    public Dados findByMaxValue() {
+        List<Dados> list = dadosRepository.findAll();
+        list.sort((o1, o2) -> o1.getValor().compareTo(o2.getValor()));
+        return list.get(list.size()-1);
+        }
+    public Dados findByMinValue() {
+        List<Dados> list = dadosRepository.findAll();
+        list.sort((o1, o2) -> o1.getValor().compareTo(o2.getValor()));
+        return list.get(0);
+    }
+    public Dados findByMaxValueOfYear(int year) {
+        List<Dados> list = dadosRepository.findByYear(year);
+        list.sort((o1, o2) -> o1.getValor().compareTo(o2.getValor()));
+        return list.get(list.size()-1);
+    }
+    public Dados findByMinValueofYear(int year) {
+        List<Dados> list = dadosRepository.findByYear(year);
+        list.sort((o1, o2) -> o1.getValor().compareTo(o2.getValor()));
+        return list.get(0);
+    }
 }
