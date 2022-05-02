@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @AllArgsConstructor
@@ -40,4 +41,14 @@ public class CrudServices {
         valueServices.updateDifference();
         return dadosSalvo;
     }
+    public Dados findByData(LocalDate data){
+        List<Dados> list = dadosRepository.findAll();
+        for (Dados d : list){
+            if (d.getData().equals(data)){
+                return d;
+            }
+        }return null;
+    }
+
+
 }

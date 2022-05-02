@@ -38,7 +38,7 @@ class ValueServicesTest {
     @Test
     void findByValorAboveTest() {
         //given
-        Dados d = new Dados(LocalDate.of(2000,1,1), 2);
+        Dados d = new Dados(LocalDate.of(2000,1,1), 2d);
         List<Dados> dados = new ArrayList<>();
         dados.add(d);
         //when
@@ -53,7 +53,7 @@ class ValueServicesTest {
     @Test
     void findByValorBelowTest() {
         //given
-        Dados d = new Dados(LocalDate.of(2000,1,1), 2);
+        Dados d = new Dados(LocalDate.of(2000,1,1), 2d);
         List<Dados> dados = new ArrayList<>();
         dados.add(d);
         //when
@@ -69,8 +69,8 @@ class ValueServicesTest {
     @Test
     void findAboveYearAverageTest() {
         //given
-        Dados d1 = new Dados(LocalDate.of(2000,1,1), 1);
-        Dados d2 = new Dados(LocalDate.of(2000,1,1), 2);
+        Dados d1 = new Dados(LocalDate.of(2000,1,1), 1d);
+        Dados d2 = new Dados(LocalDate.of(2000,1,1), 2d);
         List<Dados> dados = new ArrayList<>();
         List<Dados> dadosFiltrado = new ArrayList<>();
         dados.add(d1);
@@ -93,9 +93,9 @@ class ValueServicesTest {
     void findBelowYearAverageTest() {
 
         //given
-        Dados d1 = new Dados(LocalDate.of(2000,1,1), 1);
-        Dados d2 = new Dados(LocalDate.of(2000,1,1), 2);
-        Dados d3 = new Dados(LocalDate.of(2001,1,1), 4);
+        Dados d1 = new Dados(LocalDate.of(2000,1,1), 1d);
+        Dados d2 = new Dados(LocalDate.of(2000,1,1), 2d);
+        Dados d3 = new Dados(LocalDate.of(2001,1,1), 4d);
         List<Dados> dados = new ArrayList<>();
         List<Dados> dadosFiltrados = new ArrayList<>();
         List<Dados> dadosFiltrado2 = new  ArrayList<>();
@@ -121,9 +121,9 @@ class ValueServicesTest {
     @Test
     void findBelowTotalAverageTest() {
         //given
-        Dados d1 = new Dados(LocalDate.of(2000,1,1), 1);
-        Dados d2 = new Dados(LocalDate.of(2000,1,1), 2);
-        Dados d3 = new Dados(LocalDate.of(2001,1,1), 6);
+        Dados d1 = new Dados(LocalDate.of(2000,1,1), 1d);
+        Dados d2 = new Dados(LocalDate.of(2000,1,1), 2d);
+        Dados d3 = new Dados(LocalDate.of(2001,1,1), 6d);
         List<Dados> dados = new ArrayList<>();
         dados.add(d1);
         dados.add(d2);
@@ -144,9 +144,9 @@ class ValueServicesTest {
     @Test
     void findAboveTotalAverageTest() {
         //given
-        Dados d1 = new Dados(LocalDate.of(2000,1,1), 1);
-        Dados d2 = new Dados(LocalDate.of(2000,1,1), 2);
-        Dados d3 = new Dados(LocalDate.of(2001,1,1), 6);
+        Dados d1 = new Dados(LocalDate.of(2000,1,1), 1d);
+        Dados d2 = new Dados(LocalDate.of(2000,1,1), 2d);
+        Dados d3 = new Dados(LocalDate.of(2001,1,1), 6d);
         List<Dados> dados = new ArrayList<>();
         dados.add(d1);
         dados.add(d2);
@@ -168,9 +168,9 @@ class ValueServicesTest {
     @Test
     void totalTest() {
         //given
-        Dados d1 = new Dados(LocalDate.now(), 1);
-        Dados d2 = new Dados(LocalDate.now(), 2);
-        Dados d3 = new Dados(LocalDate.now(), 3);
+        Dados d1 = new Dados(LocalDate.now(), 1d);
+        Dados d2 = new Dados(LocalDate.now(), 2d);
+        Dados d3 = new Dados(LocalDate.now(), 3d);
         List<Dados> dados = new ArrayList<>();
 
         dados.add(d1);
@@ -189,9 +189,9 @@ class ValueServicesTest {
     void totalDoAnoTest() {
 
         //given
-        Dados d1 = new Dados(LocalDate.of(2000,1,1), 1);
-        Dados d2 = new Dados(LocalDate.of(2000,1,1), 2);
-        Dados d3 = new Dados(LocalDate.of(2001,1,1), 4);
+        Dados d1 = new Dados(LocalDate.of(2000,1,1), 1d);
+        Dados d2 = new Dados(LocalDate.of(2000,1,1), 2d);
+        Dados d3 = new Dados(LocalDate.of(2001,1,1), 4d);
         List<Dados> dados = new ArrayList<>();
 
         dados.add(d1);
@@ -209,9 +209,9 @@ class ValueServicesTest {
     void mediaTest() {
         //given
 
-        Dados d1 = new Dados(LocalDate.of(2000,1,1), 1);
-        Dados d2 = new Dados(LocalDate.of(2000,1,1), 2);
-        Dados d3 = new Dados(LocalDate.of(2001,1,1), 6);
+        Dados d1 = new Dados(LocalDate.of(2000,1,1), 1d);
+        Dados d2 = new Dados(LocalDate.of(2000,1,1), 2d);
+        Dados d3 = new Dados(LocalDate.of(2001,1,1), 6d);
         List<Dados> dados = new ArrayList<>();
 
         dados.add(d1);
@@ -231,9 +231,9 @@ class ValueServicesTest {
     void mediaByYearTest() {
 
         //given
-        Dados d1 = new Dados(LocalDate.of(2000,1,1), 1);
-        Dados d2 = new Dados(LocalDate.of(2000,1,1), 2);
-        Dados d3 = new Dados(LocalDate.of(2001,1,1), 6);
+        Dados d1 = new Dados(LocalDate.of(2000,1,1), 1d);
+        Dados d2 = new Dados(LocalDate.of(2000,1,1), 2d);
+        Dados d3 = new Dados(LocalDate.of(2001,1,1), 6d);
         List<Dados> dados = new ArrayList<>();
 
         dados.add(d1);

@@ -73,8 +73,8 @@ class CrudServicesTest {
     @Test
     void updateTest() {
         //given
-        Dados d1 = new Dados(LocalDate.now(), 1);
-        Dados d2 = new Dados(LocalDate.now(), 1);
+        Dados d1 = new Dados(LocalDate.now(), 1d);
+        Dados d2 = new Dados(LocalDate.now(), 1d);
 
         //when
         when(mockRepository.findById(1L)).thenReturn(Optional.of(d1));

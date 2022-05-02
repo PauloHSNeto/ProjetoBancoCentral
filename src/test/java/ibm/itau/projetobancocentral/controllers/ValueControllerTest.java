@@ -4,10 +4,12 @@ import ibm.itau.projetobancocentral.entities.Dados;
 import ibm.itau.projetobancocentral.services.CrudServices;
 import ibm.itau.projetobancocentral.services.DateFilterServices;
 import ibm.itau.projetobancocentral.services.ValueServices;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.ResponseEntity;
 
@@ -30,6 +32,11 @@ class ValueControllerTest {
 
     @InjectMocks
     private ValueController valueController;
+
+    @BeforeEach
+    void setUp() {
+        MockitoAnnotations.openMocks(this);
+    }
 
     @Test
     void getBelowAverageTotal() {
@@ -63,8 +70,8 @@ class ValueControllerTest {
     void getAverageByYear() {
         //given
         List<Dados> dados = new ArrayList<>();
-        dados.add(new Dados(LocalDate.of(2000, 1, 1), 1));
-        dados.add(new Dados(LocalDate.of(2000, 1, 2), 2));
+        dados.add(new Dados(LocalDate.of(2000, 1, 1), 1d));
+        dados.add(new Dados(LocalDate.of(2000, 1, 2), 2d));
         String body = "Total de Dívida Líquida do Setor Público (% PIB) : " + "3.00" + "\n"
                 + "Total de dados do ano " + 2000 + ": " + 2 + "\n"
                 + "Media de Dívida Líquida do Setor Público (% PIB) do ano " + 2000 + ": " + "1.50" + "\n";
@@ -84,9 +91,9 @@ class ValueControllerTest {
     void getTotal() {
         //given
         List<Dados> dados = new ArrayList<>();
-        dados.add(new Dados(LocalDate.of(2000, 1, 1), 1));
-        dados.add(new Dados(LocalDate.of(2000, 1, 2), 2));
-        dados.add(new Dados(LocalDate.of(2001, 1, 3), 3));
+        dados.add(new Dados(LocalDate.of(2000, 1, 1), 1d));
+        dados.add(new Dados(LocalDate.of(2000, 1, 2), 2d));
+        dados.add(new Dados(LocalDate.of(2001, 1, 3), 3d));
         String body = "Total de Dívida Líquida do Setor Público (% PIB) : 6.00" +"\n"
                 + "Total de dados : " + dados.size()+"\n"
                 + "Media de Dívida Líquida do Setor Público (% PIB) : 2.00" +"\n";

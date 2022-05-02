@@ -20,9 +20,9 @@ class DadosTest {
     @Test
     void constructorWithDataandValorTest() {
         //given
-        Dados dados = new Dados(LocalDate.now(),100);
+        Dados dados = new Dados(LocalDate.now(),100d);
         //when
-        Dados dados2 = new Dados(LocalDate.now(),100);
+        Dados dados2 = new Dados(LocalDate.now(),100d);
         //then
         assertEquals(dados, dados2);
     }
@@ -91,8 +91,8 @@ class DadosTest {
     @Test
     void testEqualsTest() {
         //given
-        Dados d = new Dados(LocalDate.now(),100);
-        Dados d2 = new Dados(LocalDate.now(),100);
+        Dados d = new Dados(LocalDate.now(),100d);
+        Dados d2 = new Dados(LocalDate.now(),100d);
         //when
         assertTrue(d.equals(d2));
     }
@@ -109,7 +109,7 @@ class DadosTest {
     @Test
     void testToStringTest() {
         //given
-        Dados d = new Dados(null,100);
+        Dados d = new Dados(null,100d);
         //then
         assertEquals("Dados(id=null, data=null, valor=100.0)", d.toString());
     }

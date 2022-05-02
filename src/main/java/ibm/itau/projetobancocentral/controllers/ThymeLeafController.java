@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @AllArgsConstructor
 public class ThymeLeafController {
     @Autowired
-    private CrudServices crudServices;
+    CrudController crudController;
 
     @RequestMapping
     public String index(Model model) {
          {
-            model.addAttribute("dados", crudServices.getAllDados());
+            model.addAttribute("dados", crudController.getDados("dados").getBody());
             return "index";
         }
     }
