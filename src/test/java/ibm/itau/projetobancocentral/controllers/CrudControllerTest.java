@@ -2,6 +2,7 @@ package ibm.itau.projetobancocentral.controllers;
 
 import ibm.itau.projetobancocentral.entities.Dados;
 import ibm.itau.projetobancocentral.services.CrudServices;
+import ibm.itau.projetobancocentral.services.ValueServices;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -23,6 +24,8 @@ class CrudControllerTest {
 
     @Mock
     private CrudServices mockService;
+    @Mock
+    private ValueServices mockValueService;
 
     @InjectMocks
     private CrudController controller;
@@ -52,7 +55,7 @@ class CrudControllerTest {
         map.put("data", "01/01/2020");
         map.put("valor", 1.5);
         Dados d = new Dados(LocalDate.of(2020,01,01),1.5);
-        ResponseEntity<Dados> expected = ResponseEntity.ok(d);
+        ResponseEntity<Dados> expected = ResponseEntity.created(null).body(d);
         //when
         when(mockService.save(eq(d))).thenReturn(d);
         ResponseEntity<Dados> actual = controller.postDados(map);
@@ -74,7 +77,7 @@ class CrudControllerTest {
         map.put("valor", 1.5);
         Dados d = new Dados(LocalDate.of(2020,01,01),1.5);
         d.setId(1L);
-        ResponseEntity<Dados> expected = ResponseEntity.ok(d);
+        ResponseEntity<Dados> expected = ResponseEntity.accepted().body(d);
         //when
         when(mockService.update(eq(1L),eq(d))).thenReturn(d);
         ResponseEntity<Dados> actual = controller.putDados(1L,map);

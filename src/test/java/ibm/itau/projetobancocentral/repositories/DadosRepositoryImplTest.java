@@ -13,19 +13,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @DataJpaTest
 class DadosRepositoryImplTest {
 
-    private DadosRepositoryImpl dadosRepository;
+    private DadosRepositoryImpl dadosRepositoryImpl;
 
     private DadosRepository testRepository;
-
-
-    @BeforeEach
-    void setUp() {
-    }
-
-    @AfterEach
-    void tearDown() {
-        testRepository.deleteAll();
-    }
 
     @Test
     void findByYearTest() {
@@ -34,7 +24,7 @@ class DadosRepositoryImplTest {
         testRepository.save(dados);
         //when
         int year = LocalDate.now().getYear();
-        Dados d1 = testRepository.findByYear(year).get(0);
+        Dados d1 = dadosRepositoryImpl.findByYear(year).get(0);
         //then
         assertEquals(dados, d1);
     }
@@ -46,7 +36,7 @@ class DadosRepositoryImplTest {
         testRepository.save(dados);
         //when
         int day = LocalDate.now().getDayOfMonth();
-        Dados d1 = testRepository.findByDay(day).get(0);
+        Dados d1 = dadosRepositoryImpl.findByDay(day).get(0);
         //then
         assertEquals(dados, d1);
 
@@ -59,7 +49,7 @@ class DadosRepositoryImplTest {
         testRepository.save(dados);
         //when
         String month = LocalDate.now().getMonth().toString();
-        Dados d1 = testRepository.findByMonth(month).get(0);
+        Dados d1 = dadosRepositoryImpl.findByMonth(month).get(0);
         //then
         assertEquals(dados, d1);
     }
@@ -72,7 +62,7 @@ class DadosRepositoryImplTest {
         testRepository.save(d1);
         //when
         double value = 1.5;
-        Dados dados2 = testRepository.findAboveValue(value).get(0);
+        Dados dados2 = dadosRepositoryImpl.findAboveValue(value).get(0);
         //then
         assertEquals(d1, dados2);
     }
@@ -85,7 +75,7 @@ class DadosRepositoryImplTest {
         testRepository.save(d1);
         //when
         double value = 1.5;
-        Dados dados2 = testRepository.findBelowValue(value).get(0);
+        Dados dados2 = dadosRepositoryImpl.findBelowValue(value).get(0);
         //then
         assertEquals(dados, dados2);
     }
@@ -106,7 +96,7 @@ class DadosRepositoryImplTest {
         testRepository.save(dados5);
         //when
         double value = 1.5;
-        List<Dados> list = testRepository.findByYearAboveValue(2020,value);
+        List<Dados> list = dadosRepositoryImpl.findByYearAboveValue(2020,value);
         //then
         assertEquals(2, list.size());
     }
@@ -127,7 +117,7 @@ class DadosRepositoryImplTest {
         testRepository.save(dados5);
         //when
         double value = 1.5;
-        List<Dados> list = testRepository.findByYearBelowValue(2020,value);
+        List<Dados> list = dadosRepositoryImpl.findByYearBelowValue(2020,value);
         //then
         assertEquals(1, list.size());
     }

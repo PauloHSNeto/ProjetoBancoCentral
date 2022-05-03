@@ -23,6 +23,8 @@ class OnboardingServicesTest {
     private RestTemplate testTemplate;
     @Mock
     private DadosRepository mockRepository;
+    @Mock
+    private ValueServices valueServices;
     @InjectMocks
     private OnboardingServices onboardingServices;
 

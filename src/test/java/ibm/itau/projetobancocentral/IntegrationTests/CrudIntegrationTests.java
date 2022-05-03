@@ -64,12 +64,11 @@ public class CrudIntegrationTests {
 
     @Test
     public void testeDPost() throws Exception {
-        Dados dados = new Dados(LocalDate.now(), 6.06);
+        Dados dados = new Dados(LocalDate.now().minusDays(1), 6.06);
         String json = objectMapper.writeValueAsString(dados);
         mockMvc.perform(MockMvcRequestBuilders.post("/").content(json).contentType("application/json"))
                 .andDo(MockMvcResultHandlers.print())
-                .andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.status().isOk()).andReturn();
+                .andExpect(status().isCreated()).andReturn();
     }
     @Test
     public void testeDUpdate() throws Exception {
@@ -77,14 +76,12 @@ public class CrudIntegrationTests {
         String json = objectMapper.writeValueAsString(dados);
         mockMvc.perform(MockMvcRequestBuilders.put("/4").content(json).contentType("application/json"))
                 .andDo(MockMvcResultHandlers.print())
-                .andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.status().isOk()).andReturn();
+                .andExpect(status().isAccepted()).andReturn();
     }
     @Test
     public void testeDDelete() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.delete("/1"))
                 .andDo(MockMvcResultHandlers.print())
-                .andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.status().isOk()).andReturn();
+                .andExpect(status().isNoContent()).andReturn();
     }
 }

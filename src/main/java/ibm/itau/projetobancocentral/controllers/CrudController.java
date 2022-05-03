@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping
+@RequestMapping(value = "/dados")
 @AllArgsConstructor
 public class CrudController {
 
@@ -25,10 +25,11 @@ public class CrudController {
     @Autowired
     private ValueServices valueServices;
 
-    @GetMapping(value ="/dados")
+    @GetMapping(value ="/")
     public ResponseEntity<List<Dados>> getDados(@RequestParam(defaultValue = "data") String sortBy) {
         List<Dados> dadosList = crudServices.getAllDados();
        valueServices.sortByValorOrDate(dadosList, sortBy);
+       valueServices.updateDifference();
         return ResponseEntity.ok(dadosList);
     }
 
@@ -42,7 +43,7 @@ public class CrudController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Dado não encontrado", e);
         }
     }
-    @PostMapping
+    @PostMapping(value ="/")
     public ResponseEntity<Dados> postDados(@RequestBody Map<String,Object> body) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         Dados dado = null;

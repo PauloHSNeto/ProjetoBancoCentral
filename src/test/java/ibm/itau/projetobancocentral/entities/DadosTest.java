@@ -111,6 +111,6 @@ class DadosTest {
         //given
         Dados d = new Dados(null,100d);
         //then
-        assertEquals("Dados(id=null, data=null, valor=100.0)", d.toString());
+        assertEquals("Dados(id=null, data=null, valor=100.0, difference=null)", d.toString());
     }
 }

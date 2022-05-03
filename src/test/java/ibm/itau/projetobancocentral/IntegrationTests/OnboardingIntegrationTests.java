@@ -17,6 +17,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.time.LocalDate;
 
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @AutoConfigureMockMvc
@@ -45,7 +46,7 @@ public class OnboardingIntegrationTests {
         Dados d3 = new Dados(LocalDate.now(),1.6);
         Dados[] dados = new Dados[]{d1,d2,d3};
         //WHEN
-
+        when(restTemplate.getForObject(url, Dados[].class)).thenReturn(dados);
         //THEN
         mockMvc.perform(MockMvcRequestBuilders.post("/onboarding").content(url).contentType(String.valueOf(String.class)))
                 .andDo(MockMvcResultHandlers.print())
