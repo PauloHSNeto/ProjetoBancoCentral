@@ -35,9 +35,9 @@ public class CrudController {
         List<Dados> dadosList = crudServices.getAllDados();
        valueServices.sortByValorOrDate(dadosList, sortBy);
        valueServices.updateDifference();
+       if(dadosList.isEmpty()) throw  new ResponseStatusException(HttpStatus.NO_CONTENT,"Nenhum Valor Encontrado Na Daabase");
         return ResponseEntity.ok(dadosList);
     }
-
 
     @Operation(summary = "Show Dados by Id", description = "Get a Dados by its id", tags = {"Basic CRUD"})
     @GetMapping(value = "/{id}")
@@ -47,7 +47,7 @@ public class CrudController {
             dados = crudServices.findById(id);
             return ResponseEntity.ok(dados);
         } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Dado não encontrado", e);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Dado com id: "+ id +" não encontrado", e);
         }
     }
     @Operation(summary = "Post a new Dados", description = "Create a new Dados with an unused date", tags = {"Basic CRUD"})
@@ -67,7 +67,7 @@ public class CrudController {
             crudServices.save(dado);
             return ResponseEntity.status(HttpStatus.CREATED).body(dado);
         }else {
-            throw new ResponseStatusException(HttpStatus.CONFLICT, "Dado já existe");
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Dado com a data "+ dado.getData() + " já existe");
         }
     }
     @Operation(summary = "Delete Dados by Id", description = "Delete a Dados by its id", tags = {"Basic CRUD"})
@@ -76,7 +76,7 @@ public class CrudController {
         try {
             crudServices.deleteById(id);
         } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Dado não encontrado", e);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Dado com id: "+ id +" não encontrado", e);
         }
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Dado de id: " + id + " deletado com sucesso");
     }
@@ -91,12 +91,12 @@ public class CrudController {
                     LocalDate.parse(map.get("data").toString(),formatter),
                     (double) map.get("valor"));
         } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Não foi possível converter os dados", e);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Não foi possível converter os valores", e);
         }
         try {
             crudServices.update(id, dado);
         } catch (Exception e) {
-                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Dado não encontrado", e);
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Dado com id: "+ id +" não encontrado", e);
         }
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(dado);
     }

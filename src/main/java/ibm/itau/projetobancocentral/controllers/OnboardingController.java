@@ -16,11 +16,14 @@ import org.springframework.web.bind.annotation.*;
 public class OnboardingController {
     @Autowired
     private OnboardingServices onboardingServices;
+    @Autowired
+    private ValueServices valueServices;
 
     @Operation(summary = "Send Url to the application", description = "Recieves the url of the Central Banks`s API and populates de the database with the results", tags = {"Onboarding"})
     @PostMapping
     public ResponseEntity<String> onboarding(@RequestBody String url) {
         onboardingServices.onboarding(url);
+        valueServices.updateDifference();
         return ResponseEntity.ok("Onboarding realizado com sucesso!");
     }
     @Operation(summary = "Removes all data from the databse", description = "Deletes all values form database", tags = {"Onboarding"})

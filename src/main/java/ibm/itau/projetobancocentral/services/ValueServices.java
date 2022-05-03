@@ -61,7 +61,7 @@ public class ValueServices {
     public void updateDifference() {
         List<Dados> list = dadosRepository.findAll();
         list.sort((o1, o2) -> o1.getData().compareTo(o2.getData()));
-        for (int i = 1; i < list.size(); i++) {
+        for (int i = 1; i < list.size(); i++) {//atualiza a diferenca entre valores
                 list.get(i).setDifference(list.get(i).getValor() - list.get(i-1).getValor());
                 dadosRepository.save(list.get(i));
             }
@@ -94,5 +94,4 @@ public class ValueServices {
             list.sort(Comparator.comparing(Dados::getData));
         }
     }
-
 }

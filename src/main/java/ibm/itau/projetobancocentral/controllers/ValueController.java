@@ -50,6 +50,7 @@ public class ValueController {
     @GetMapping(value = "/above-average/year/{year}/")
     public ResponseEntity<List<Dados>> getAboveAverageYear(@PathVariable("year") int year) {
         List<Dados> dados = valueServices.findAboveYearAverage(year);
+        valueServices.updateDifference();
         return ResponseEntity.ok(dados);
     }
     @Operation(summary = "Values of Year", description = "Get Total values, number of Dados and Average of an year", tags = {"Value"})
@@ -61,6 +62,7 @@ public class ValueController {
         String body ="Total de Dívida Líquida do Setor Público (% PIB) : " + String.format("%.2f",totalDoAno) +"\n"
                 + "Total de dados do ano " + year + ": " + dados.size() +"\n"
             + "Media de Dívida Líquida do Setor Público (% PIB) do ano " + year + ": " + String.format("%.2f",media)+"\n";
+        valueServices.updateDifference();
         return ResponseEntity.ok(body);
     }
     @GetMapping(value = "/total")
@@ -72,6 +74,7 @@ public class ValueController {
         String body = "Total de Dívida Líquida do Setor Público (% PIB) : " + String.format("%.2f",total) +"\n"
                 + "Total de dados : " + dados.size()+"\n"
                 + "Media de Dívida Líquida do Setor Público (% PIB) : " + String.format("%.2f",media) +"\n";
+        valueServices.updateDifference();
         return ResponseEntity.ok(body);
     }
     @GetMapping(value = "/max")
@@ -81,6 +84,7 @@ public class ValueController {
         LocalDate data = valueServices.findByMaxValue().getData();
         String body = "Maior Dívida Líquida do Setor Público (% PIB) : " + String.format("%.2f",max) +"\n"
                                 + "Data : " + data +"\n";
+        valueServices.updateDifference();
         return ResponseEntity.ok(body);
     }
     @GetMapping(value = "/min")
@@ -90,6 +94,7 @@ public class ValueController {
         LocalDate data = valueServices.findByMinValue().getData();
         String body = "Menor Dívida Líquida do Setor Público (% PIB) : " + String.format("%.2f",min) +"\n"
                                 + "Data : " + data +"\n";
+        valueServices.updateDifference();
         return ResponseEntity.ok(body);
     }
     @GetMapping(value ="/max/{year}")
@@ -99,6 +104,7 @@ public class ValueController {
         LocalDate data = valueServices.findByMaxValueOfYear(year).getData();
         String body = "Maior Dívida Líquida do Setor Público (% PIB) do ano "+ year +" : " + String.format("%.2f",max) +"\n"
                         + "Data : " + data +"\n";
+        valueServices.updateDifference();
         return ResponseEntity.ok(body);
     }
     @GetMapping(value ="/min/{year}")
@@ -108,6 +114,7 @@ public class ValueController {
         LocalDate data = valueServices.findByMinValueofYear(year).getData();
         String body = "Menor Dívida Líquida do Setor Público (% PIB) do ano "+ year +" : " + String.format("%.2f",min) +"\n"
                         + "Data : " + data +"\n";
+        valueServices.updateDifference();
         return ResponseEntity.ok(body);
     }
 }
