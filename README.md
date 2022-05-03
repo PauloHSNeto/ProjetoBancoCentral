@@ -12,7 +12,7 @@ O projeto é uma api que exposta na porta localhost:8080 que consome dados do Ba
       PostMan
       ThymeLeaf
       JUnit
-      Swagger
+      OpenApi
       Mockito
  
 A api pública do Banco Central, na (url): https://api.bcb.gov.br/dados/serie/bcdata.sgs.4505/dados?formato=json, devolve uma lista JSON com valores da Dívida Líquida do Setor Público (% PIB) entre DEZ/2001 e JAN/2022.
@@ -31,17 +31,17 @@ Utilizando o PostMan, realizarei uma Request com método POST(localhost:8080/onb
 
 Ao terminar o processo de Onboarding, posso utilizar os outros métodos Rest para manipular os dados salvos no banco (POST, DELETE, PUT, GET) e poderei usar filtrar os dados por data ou valor;
 
-O método postDados (POST localhost:8080) recebe um Json com "data" e "valor" e cria um novo Dado. O "id" e a "diferenca" serão gerados automaticamente pela aplicação.
+O método postDados (POST localhost:8080/dados/) recebe um Json com "data" e "valor" e cria um novo Dado. O "id" e a "diferenca" serão gerados automaticamente pela aplicação.
 -Caso o json tenha sido escrito de forma incorreta, devolve um ResponseStatusException(HttpStatus.BAD_REQUEST, "Não foi possível converter os dados")
 -Caso o valor "data" já exista na base de dados, devolve HttpStatus.CONFLICT, "Dado já existe" pois o projeto não permite mais de um Dados para um data.
 
-O método deleteDados (DELETE localhost:8080/{id}) procura o Dados por id e o remove da data-base retornando HttpStatus.NO_CONTENT e "Dado de id: " + id + " deletado com sucesso"
+O método deleteDados (DELETE localhost:8080/dados/{id}) procura o Dados por id e o remove da data-base retornando HttpStatus.NO_CONTENT e "Dado de id: " + id + " deletado com sucesso"
  - Caso o Dado não seja encontrado, retorna HttpStatus.NOT_FOUND, "Dado não encontrado"
 
-O método putDados (PUT Localhost:8080/{id}) atualiza o Dados que foi encontrado pelo id.
+O método putDados (PUT Localhost:8080/dados/{id}) atualiza o Dados que foi encontrado pelo id.
   - Caso o Dado não seja encontrado, retorna HttpStatus.NOT_FOUND, "Dado não encontrado"
 
-O método getDadosById (GET localhost:8080/{id}) atualiza o Dados que foi encontrado pelo id.
+O método getDadosById (GET localhost:8080/dados/{id}) atualiza o Dados que foi encontrado pelo id.
   - Caso o Dado não seja encontrado, retorna HttpStatus.NOT_FOUND, "Dado não encontrado"
 
 O método getDados (GET  localhost:8080/dados ) recebe todos os Dados da data-base e aplica o método "updateDifference" para garantir que os valores de diferença estão corretos. A forma de sorting padrão para esse método e por data, porem podemos ordenar a resposta por "valor" através do parâmetro "sortBy" (localhost:8080/dados?sortBy=valor)
@@ -49,4 +49,6 @@ O método getDados (GET  localhost:8080/dados ) recebe todos os Dados da data-ba
 Com Thymeleaf Criei uma pagina que pode ser acessada pela url http://localhost:8080/thymeleaf/ que mostra os valores da data-base em uma tabela. Essa tebale só será preenchida quando dados forem colocados através do método postDados ou o processo de Onboarding.
 
 Os testes unitários e de integração foram feitos com Mockito, JUnit e TestTemplate para simular a funções básicas da aplicação utilizando o Banco de dados em memoria H2
+
+A documentacao da api foi feita pela plataforma OpenAPI e pode acessada pelo link http://localhost:8080/swagger-ui/index.html#/
 
