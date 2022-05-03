@@ -47,5 +47,5 @@ O método getDados (GET  localhost:8080/dados ) recebe todos os Dados da data-ba
 
 Com Thymeleaf Criei uma pagina que pode ser acessada pela url http://localhost:8080/thymeleaf/ que mostra os valores da data-base em uma tabela. Essa tebale só será preenchida quando dados forem colocados através do método postDados ou o processo de Onboarding.
 
-Os testes unitários e de integração foram feitos com Mockito, JUnit e TestTemplate para simular a funções básicas da aplicação.
+Os testes unitários e de integração foram feitos com Mockito, JUnit e TestTemplate para simular a funções básicas da aplicação utilizando o Banco de dados em memoria H2
 
