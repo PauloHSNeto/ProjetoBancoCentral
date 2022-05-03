@@ -5,9 +5,9 @@ O projeto é uma api que exposta na porta localhost:8080 que consome dados do Ba
       
       JDK Amazon correto 11
       Maven 4.0
-      SpringBoot (Spring Web, Jpa, MySQL Connector, h2, LomBok, RestTemplate )   
       IDE Intelij
       Git
+      MySQLServer
       MySQL workBench
       PostMan
       ThymeLeaf
