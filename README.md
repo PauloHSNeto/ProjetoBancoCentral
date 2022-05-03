@@ -12,6 +12,7 @@ O projeto é uma api que exposta na porta localhost:8080 que consome dados do Ba
       PostMan
       ThymeLeaf
       JUnit
+      Swagger
       Mockito
  
 A api pública do Banco Central, na (url): https://api.bcb.gov.br/dados/serie/bcdata.sgs.4505/dados?formato=json, devolve uma lista JSON com valores da Dívida Líquida do Setor Público (% PIB) entre DEZ/2001 e JAN/2022.
