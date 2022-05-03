@@ -1,28 +1,45 @@
 Projeto Banco Central
 Desafio Itau
 estagiário Paulo Henrique da Silva Neto, trilha Java back end Itau
-O projeto é uma api que exposta na porta localhost:8080 que consome dados do Banco Central e os armazena em um banco de dados MySQL utilizando as tecnologias:
- JDK Amazon correto 11
- Maven 4.0
- SpringBoot (Spring Web, Jpa, MySQL Connector, h2, LomBok, RestTemplate )
- IDE Intelij
- Git
- MySQL workBench
- PostMan
- ThymeLeaf
- Docker
- JUnit
- Mockito
+O projeto é uma api que exposta na porta localhost:8080 que consome dados do Banco Central e os armazena em um banco de dados MySQL utilizando as tecnologias: 
+
+   JDK Amazon correto 11
+   
+   Maven 4.0
+   
+   SpringBoot (Spring Web, Jpa, MySQL Connector, h2, LomBok, RestTemplate )
+   
+   IDE Intelij
+   
+   Git
+   
+   MySQL workBench
+   
+   PostMan
+   
+   ThymeLeaf
+   
+   Docker
+   
+   JUnit
+   
+   Mockito
  
 A api pública do Banco Central, na (url): https://api.bcb.gov.br/dados/serie/bcdata.sgs.4505/dados?formato=json, devolve uma lista JSON com valores da Dívida Líquida do Setor Público (% PIB) entre DEZ/2001 e JAN/2022.
 
-O projeto esta organizado em 3 camadas "Controllers, Services, Repository" e 5 funções principais: 
 
- Crud - Função para realizar os métodos básicos de uma Rest APi POST, DELETE, PUT, GET; 
- Value - Para ordenar a lista de Dados pelo valor da Divida, encontrar valores máximos/mínimo ou acima/abaixo da media de um certo pedioro de tempo e calculo de divida total e para o calculo da diferença de valores de um Dado pelo valor do Dado anterior; 
- DateFilter - Encontra Dados pelo valor do dia/mês/ano, uma data especifica ou Dados entre datas; 
- Onboarding - O "client" da aplicação, que captura os dados do Banco Central(com o RestTemplate) e os deposita no banco de dados MySQL; 
- Thymeleaf - Para mostrar os valores no Banco de Dados pelo browser;
+O projeto esta organizado em 3 camadas "Controllers, Services, Repository" e 5 funções principais:   
+
+
+  Crud - Função para realizar os métodos básicos de uma Rest APi POST, DELETE, PUT, GET; 
+ 
+  Value - Para ordenar a lista de Dados pelo valor da Divida, encontrar valores máximos/mínimo ou acima/abaixo da media de um certo pedioro de tempo e calculo de divida total e para o calculo da diferença de valores de um Dado pelo valor do Dado anterior; 
+ 
+  DateFilter - Encontra Dados pelo valor do dia/mês/ano, uma data especifica ou Dados entre datas; 
+ 
+  Onboarding - O "client" da aplicação, que captura os dados do Banco Central(com o RestTemplate) e os deposita no banco de dados MySQL; 
+ 
+  Thymeleaf - Para mostrar os valores no Banco de Dados pelo browser;
  
  
 Utilizando o PostMan, realizarei uma Request com método POST(localhost:8080/onboarding), enviado á aplicação a (url) para que capture os dados e, através do RestTemplate, os transforme em objetos do tipo "Dados( Long id, LocalDate date, double valor,double diferenca)" que serão salvos na base de dados local MySQL pelo JPA. Esse é o processo de Onboarding dos dados.
