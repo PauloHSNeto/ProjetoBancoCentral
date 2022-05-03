@@ -48,8 +48,6 @@ Ao terminar o processo de Onboarding, posso utilizar os outros métodos Rest par
     
     O metodo getDados (GET  localhost:8080/dados ) recebe todos os Dados da database e aplica o metodo "updateDifference" para garantir que os valores de diferenca estao corretos. A forma de sorting padrao para esse metodo e por data, porem pode mos ordernar a responsta por "valor" atraves do parametro "sortBy" (localhost:8080/dados?sortBy=valor)
 
+Com Thymeleaf Criei uma pagina que pode ser acessada pela url http://localhost:8080/thymeleaf/ que mostra os valores da database em uma tabela. Essa tebale so sera preenchida quando dados forem colocados atrazes ds metodos postDados ou o processo de Onboarding.
 
-
-
-
-
+Os teste unitarios e de integracao foram feitos com Mockito, JUnit e TestTemplate para simular a funcoes basicas da aplicacao. 
