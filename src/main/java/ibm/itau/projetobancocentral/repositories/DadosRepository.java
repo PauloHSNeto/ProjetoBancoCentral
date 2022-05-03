@@ -21,5 +21,4 @@ public interface DadosRepository extends JpaRepository<Dados, Long> {
     List<Dados> findByYearAboveValue(int year, double value);
     List<Dados> findByYearBelowValue(int year, double value);
 
-    Dados findByData(LocalDate data);
 }

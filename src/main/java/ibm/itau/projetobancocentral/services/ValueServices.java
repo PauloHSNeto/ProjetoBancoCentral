@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.awt.datatransfer.Clipboard;
+import java.util.Comparator;
 import java.util.List;
 @AllArgsConstructor
 @Service
@@ -85,4 +86,13 @@ public class ValueServices {
         list.sort((o1, o2) -> o1.getValor().compareTo(o2.getValor()));
         return list.get(0);
     }
+    public void sortByValorOrDate(List<Dados> list, String sortBy) {
+        if (sortBy.equals("valor")) {
+            list.sort(Comparator.comparing(Dados::getValor));
+        }
+        else {
+            list.sort(Comparator.comparing(Dados::getData));
+        }
+    }
+
 }

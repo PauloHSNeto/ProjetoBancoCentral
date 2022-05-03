@@ -40,8 +40,6 @@ public class DateFilterServices {
         }
         return result;
     }
-
-
     //Para a funcao de UpdateValores
     public Dados findFirstEntryBeforeDate(Dados dados) {
         Dados answer =  new Dados();
@@ -60,5 +58,17 @@ public class DateFilterServices {
             }
         }
         return answer;
+    }
+
+    public Dados findByDate(String date) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate date1 = LocalDate.parse(date,formatter);
+        List<Dados> list = dadosRepository.findAll();
+        for (Dados d : list) {
+            if (d.getData().equals(date1)) {
+                return d;
+            }
+        }
+        return null;
     }
 }

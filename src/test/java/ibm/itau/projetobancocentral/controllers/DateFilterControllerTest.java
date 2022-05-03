@@ -50,7 +50,7 @@ class DateFilterControllerTest {
     @Test
     void getDadosByAnoTest() {
         //when
-        dateFilterController.getDadosByAno(2020);
+        dateFilterController.getDadosByAno("data",2020);
         //then
         verify(mockService, times(1)).findByYear(2020);
     }

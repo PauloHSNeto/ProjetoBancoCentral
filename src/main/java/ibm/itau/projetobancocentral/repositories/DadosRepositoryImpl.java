@@ -87,7 +87,6 @@ public class DadosRepositoryImpl {
         return listaFiltrada;
     }
 
-
     public List<Dados> findByYearBelowValue(int year, double value) {
         List<Dados> list = dadosRepository.findByYear(year);
         List<Dados> listaFiltrada = new ArrayList<>();
