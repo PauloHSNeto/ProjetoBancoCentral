@@ -2,6 +2,7 @@ package ibm.itau.projetobancocentral.services;
 
 import ibm.itau.projetobancocentral.entities.Dados;
 import ibm.itau.projetobancocentral.repositories.DadosRepository;
+import org.junit.Ignore;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -33,6 +34,7 @@ class CrudServicesTest {
         MockitoAnnotations.openMocks(this);    }
 
     @Test
+    @Ignore
     void findAllTest() {
         //given
         testServices.getAllDados();
@@ -40,6 +42,7 @@ class CrudServicesTest {
         verify(mockRepository).findAll();
     }
     @Test
+    @Ignore
     void findByIdTest() {
         //when
         testServices.findById(1L);
@@ -47,6 +50,7 @@ class CrudServicesTest {
         verify(mockRepository).findById(1L);
     }
     @Test
+    @Ignore
     void saveTest() {
         //given
         Dados dado = new Dados();
@@ -64,6 +68,7 @@ class CrudServicesTest {
         assertEquals(capturedDados,dado);
     }
     @Test
+    @Ignore
     void deleteByIdTest() {
         //given
         testServices.deleteById(1L);
@@ -71,6 +76,7 @@ class CrudServicesTest {
         verify(mockRepository, times(1)).deleteById(1L);
     }
     @Test
+    @Ignore
     void updateTest() {
         //given
         Dados d1 = new Dados(LocalDate.now(), 1d);

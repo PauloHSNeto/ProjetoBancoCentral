@@ -1,9 +1,11 @@
 package ibm.itau.projetobancocentral.controllers;
 
 import ibm.itau.projetobancocentral.entities.Dados;
+import ibm.itau.projetobancocentral.repositories.DadosRepository;
 import ibm.itau.projetobancocentral.services.CrudServices;
 import ibm.itau.projetobancocentral.services.DateFilterServices;
 import ibm.itau.projetobancocentral.services.ValueServices;
+import org.junit.Ignore;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,8 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class ValueControllerTest {
@@ -29,6 +30,8 @@ class ValueControllerTest {
     private DateFilterServices dateFilterServices;
     @Mock
     private CrudServices crudServices;
+    @Mock
+    private DadosRepository mockRepository;
 
     @InjectMocks
     private ValueController valueController;
@@ -107,5 +110,40 @@ class ValueControllerTest {
         verify(mockService).media();
         verify(mockService).total();
         verify(crudServices).getAllDados();
+    }
+
+    @Test
+    @Ignore
+    void getMaxTest() {
+        //given
+        List<Dados> dados = new ArrayList<>();
+        dados.add(new Dados(LocalDate.of(2000, 1, 1), 1d));
+        dados.add(new Dados(LocalDate.of(2000, 1, 2), 2d));
+        dados.add(new Dados(LocalDate.of(2001, 1, 3), 3d));
+        ResponseEntity<Dados> expected = ResponseEntity.ok(dados.get(2));
+        //when
+        when(mockService.findByMaxValue().getValor()).thenReturn(3d);
+        when(mockService.findByMaxValue().getData()).thenReturn(LocalDate.of(2001, 1, 3));
+        doNothing().when(mockService).updateDifference();
+        doNothing().when(mockRepository).findAll();
+        doNothing().when(mockRepository).save(any());
+        ResponseEntity<String> response = valueController.getMax();
+        //then
+        assertEquals(expected, response);
+    }
+
+    @Test
+    @Ignore
+    void getMinTest() {
+    }
+
+    @Test
+    @Ignore
+    void getMaxYearTest() {
+    }
+
+    @Test
+    @Ignore
+    void getMinYearTest() {
     }
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.awt.datatransfer.Clipboard;
+import java.math.BigDecimal;
 import java.util.Comparator;
 import java.util.List;
 @AllArgsConstructor
@@ -62,7 +63,7 @@ public class ValueServices {
         List<Dados> list = dadosRepository.findAll();
         list.sort((o1, o2) -> o1.getData().compareTo(o2.getData()));
         for (int i = 1; i < list.size(); i++) {//atualiza a diferenca entre valores
-                list.get(i).setDifference(list.get(i).getValor() - list.get(i-1).getValor());
+                list.get(i).setDifference((BigDecimal.valueOf(list.get(i).getValor() - list.get(i-1).getValor())));
                 dadosRepository.save(list.get(i));
             }
         }

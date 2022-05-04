@@ -1,123 +1,152 @@
 package ibm.itau.projetobancocentral.repositories;
 
 import ibm.itau.projetobancocentral.entities.Dados;
+import ibm.itau.projetobancocentral.services.CrudServices;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-@DataJpaTest
+import static org.mockito.Mockito.when;
+
+@ExtendWith(MockitoExtension.class)
 class DadosRepositoryImplTest {
 
+    @InjectMocks
     private DadosRepositoryImpl dadosRepositoryImpl;
-
+    @Mock
     private DadosRepository testRepository;
+    @BeforeEach
+    void setUp() {
+        MockitoAnnotations.openMocks(this);
+    }
 
     @Test
     void findByYearTest() {
         //given
-        Dados dados = new Dados(LocalDate.now(), 1.0);
-        testRepository.save(dados);
+        List<Dados> dados = new ArrayList<>();
+        dados.add(new Dados(LocalDate.of(2001,01,11),1.1));
+        dados.add(new Dados(LocalDate.of(2002,02,12),1.2));
+        dados.add(new Dados(LocalDate.of(2003,03,13),1.3));
+        dados.add(new Dados(LocalDate.of(2004,04,14),1.4));
+        dados.add(new Dados(LocalDate.of(2005,05,15),1.5));
         //when
-        int year = LocalDate.now().getYear();
-        Dados d1 = dadosRepositoryImpl.findByYear(year).get(0);
+        when(testRepository.findAll()).thenReturn(dados);
+        Dados d1 = dadosRepositoryImpl.findByYear(2001).get(0);
         //then
-        assertEquals(dados, d1);
+        assertEquals(dados.get(0), d1);
     }
 
     @Test
     void findByDayTest() {
         //given
-        Dados dados = new Dados(LocalDate.now(), 1.0);
-        testRepository.save(dados);
+        List<Dados> dados = new ArrayList<>();
+        dados.add(new Dados(LocalDate.of(2001,01,11),1.1));
+        dados.add(new Dados(LocalDate.of(2002,02,12),1.2));
+        dados.add(new Dados(LocalDate.of(2003,03,13),1.3));
+        dados.add(new Dados(LocalDate.of(2004,04,14),1.4));
+        dados.add(new Dados(LocalDate.of(2005,05,15),1.5));
         //when
-        int day = LocalDate.now().getDayOfMonth();
-        Dados d1 = dadosRepositoryImpl.findByDay(day).get(0);
+        when(testRepository.findAll()).thenReturn(dados);
+        Dados d1 = dadosRepositoryImpl.findByDay(11).get(0);
         //then
-        assertEquals(dados, d1);
+        assertEquals(dados.get(0), d1);
 
     }
 
     @Test
     void findByMonthTest() {
         //given
-        Dados dados = new Dados(LocalDate.now(), 1.0);
-        testRepository.save(dados);
+        List<Dados> dados = new ArrayList<>();
+        dados.add(new Dados(LocalDate.of(2001,01,11),1.1));
+        dados.add(new Dados(LocalDate.of(2002,02,12),1.2));
+        dados.add(new Dados(LocalDate.of(2003,03,13),1.3));
+        dados.add(new Dados(LocalDate.of(2004,04,14),1.4));
+        dados.add(new Dados(LocalDate.of(2005,05,15),1.5));
+        String month = "April";
         //when
-        String month = LocalDate.now().getMonth().toString();
+        when(testRepository.findAll()).thenReturn(dados);
         Dados d1 = dadosRepositoryImpl.findByMonth(month).get(0);
         //then
-        assertEquals(dados, d1);
+        assertEquals(dados.get(3), d1);
     }
     @Test
     void findAboveValueTest() {
         //given
-        Dados dados = new Dados(LocalDate.now(), 1.0);
-        Dados d1 = new Dados(LocalDate.now(), 2.0);
-        testRepository.save(dados);
-        testRepository.save(d1);
+        List<Dados> dados = new ArrayList<>();
+        dados.add(new Dados(LocalDate.of(2001,01,11),1.1));
+        dados.add(new Dados(LocalDate.of(2002,02,12),1.2));
+        dados.add(new Dados(LocalDate.of(2003,03,13),1.3));
+        dados.add(new Dados(LocalDate.of(2004,04,14),1.4));
+        dados.add(new Dados(LocalDate.of(2005,05,15),1.5));
         //when
-        double value = 1.5;
-        Dados dados2 = dadosRepositoryImpl.findAboveValue(value).get(0);
+        when(testRepository.findAll()).thenReturn(dados);
+        List<Dados> dados2 = dadosRepositoryImpl.findAboveValue(1.22);
         //then
-        assertEquals(d1, dados2);
+        assertEquals(3, dados2.size());
     }
     @Test
     void findBelowValueTest() {
         //given
-        Dados dados = new Dados(LocalDate.now(), 1.0);
-        Dados d1 = new Dados(LocalDate.now(), 2.0);
-        testRepository.save(dados);
-        testRepository.save(d1);
+        List<Dados> dados = new ArrayList<>();
+        dados.add(new Dados(LocalDate.of(2001,01,11),1.1));
+        dados.add(new Dados(LocalDate.of(2002,02,12),1.2));
+        dados.add(new Dados(LocalDate.of(2003,03,13),1.3));
+        dados.add(new Dados(LocalDate.of(2004,04,14),1.4));
+        dados.add(new Dados(LocalDate.of(2005,05,15),1.5));
         //when
-        double value = 1.5;
-        Dados dados2 = dadosRepositoryImpl.findBelowValue(value).get(0);
+        when(testRepository.findAll()).thenReturn(dados);
+        List<Dados> dados2 = dadosRepositoryImpl.findBelowValue(1.45);
         //then
-        assertEquals(dados, dados2);
+        assertEquals(4, dados2.size());
     }
     @Test
     void findByYearAboveValueTest() {
         //given
-        Dados dados = new Dados(LocalDate.of(2020,01,01), 1.0);
-        Dados d1 = new Dados(LocalDate.of(2020,01,01), 2.0);
-        Dados dados2 = new Dados(LocalDate.of(2020,01,01), 2.0);
-        Dados dados3 = new Dados(LocalDate.of(2021,01,01), 1.0);
-        Dados dados4 = new Dados(LocalDate.of(2021,01,01), 2.0);
-        Dados dados5 = new Dados(LocalDate.of(2021,01,01), 2.0);
-        testRepository.save(dados);
-        testRepository.save(d1);
-        testRepository.save(dados2);
-        testRepository.save(dados3);
-        testRepository.save(dados4);
-        testRepository.save(dados5);
+        List<Dados> dados = new ArrayList<>();
+        dados.add(new Dados(LocalDate.of(2020,01,01), 1.0));
+        dados.add(new Dados(LocalDate.of(2020,01,01), 2.0));
+        dados.add( new Dados(LocalDate.of(2020,01,01), 2.0));
+        dados.add( new Dados(LocalDate.of(2021,01,01), 1.0));
+        dados.add( new Dados(LocalDate.of(2021,01,01), 2.0));
+        dados.add( new Dados(LocalDate.of(2021,01,01), 2.0));
+        List<Dados> dados2020 = new ArrayList<>();
+        dados2020.add(new Dados(LocalDate.of(2020,01,01), 1.0));
+        dados2020.add(new Dados(LocalDate.of(2020,02,01), 2.0));
+        dados2020.add(new Dados(LocalDate.of(2020,03,01), 2.0));
         //when
-        double value = 1.5;
-        List<Dados> list = dadosRepositoryImpl.findByYearAboveValue(2020,value);
+        when(testRepository.findByYear(2020)).thenReturn(dados2020);
+        List<Dados> list = dadosRepositoryImpl.findByYearAboveValue(2020,1.5);
         //then
         assertEquals(2, list.size());
     }
     @Test
     void findByYearBelowValueTest() {
         //given
-        Dados dados = new Dados(LocalDate.of(2020,01,01), 1.0);
-        Dados d1 = new Dados(LocalDate.of(2020,01,01), 2.0);
-        Dados dados2 = new Dados(LocalDate.of(2020,01,01), 2.0);
-        Dados dados3 = new Dados(LocalDate.of(2021,01,01), 1.0);
-        Dados dados4 = new Dados(LocalDate.of(2021,01,01), 2.0);
-        Dados dados5 = new Dados(LocalDate.of(2021,01,01), 2.0);
-        testRepository.save(dados);
-        testRepository.save(d1);
-        testRepository.save(dados2);
-        testRepository.save(dados3);
-        testRepository.save(dados4);
-        testRepository.save(dados5);
+        List<Dados> dados = new ArrayList<>();
+        dados.add(new Dados(LocalDate.of(2020,01,01), 1.0));
+        dados.add(new Dados(LocalDate.of(2020,01,01), 2.0));
+        dados.add( new Dados(LocalDate.of(2020,01,01), 2.0));
+        dados.add( new Dados(LocalDate.of(2021,01,01), 1.0));
+        dados.add( new Dados(LocalDate.of(2021,01,01), 2.0));
+        dados.add( new Dados(LocalDate.of(2021,01,01), 2.0));
+        List<Dados> dados2020 = new ArrayList<>();
+        dados2020.add(new Dados(LocalDate.of(2020,01,01), 1.0));
+        dados2020.add(new Dados(LocalDate.of(2020,02,01), 2.0));
+        dados2020.add(new Dados(LocalDate.of(2020,03,01), 2.0));
         //when
-        double value = 1.5;
-        List<Dados> list = dadosRepositoryImpl.findByYearBelowValue(2020,value);
+        when(testRepository.findByYear(2020)).thenReturn(dados2020);
+        List<Dados> list = dadosRepositoryImpl.findByYearBelowValue(2020,1.5);
         //then
         assertEquals(1, list.size());
     }

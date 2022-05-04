@@ -49,14 +49,14 @@ public class CrudIntegrationTests {
     }
     @Test
     public void testeDeConsultadeTodosOsDados() throws Exception {
-        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/dados"))
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/dados/"))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.status().isOk()).andReturn();
     }
     @Test
     public void testeDeConsultadeTodosOsDadosPorID() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/3"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/dados/3"))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.status().isOk()).andReturn();
@@ -66,7 +66,7 @@ public class CrudIntegrationTests {
     public void testeDPost() throws Exception {
         Dados dados = new Dados(LocalDate.now().minusDays(1), 6.06);
         String json = objectMapper.writeValueAsString(dados);
-        mockMvc.perform(MockMvcRequestBuilders.post("/").content(json).contentType("application/json"))
+        mockMvc.perform(MockMvcRequestBuilders.post("/dados/").content(json).contentType("application/json"))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isCreated()).andReturn();
     }
@@ -74,13 +74,13 @@ public class CrudIntegrationTests {
     public void testeDUpdate() throws Exception {
         Dados dados = new Dados(LocalDate.now(), 7.07);
         String json = objectMapper.writeValueAsString(dados);
-        mockMvc.perform(MockMvcRequestBuilders.put("/4").content(json).contentType("application/json"))
+        mockMvc.perform(MockMvcRequestBuilders.put("/dados/4").content(json).contentType("application/json"))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isAccepted()).andReturn();
     }
     @Test
     public void testeDDelete() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.delete("/1"))
+        mockMvc.perform(MockMvcRequestBuilders.delete("/dados/1"))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isNoContent()).andReturn();
     }

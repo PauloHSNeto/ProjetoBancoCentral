@@ -35,10 +35,11 @@ public class CrudController {
         List<Dados> dadosList = crudServices.getAllDados();
        valueServices.sortByValorOrDate(dadosList, sortBy);
        valueServices.updateDifference();
-       if(dadosList.isEmpty()) throw  new ResponseStatusException(HttpStatus.NO_CONTENT,"Nenhum Valor Encontrado Na Daabase");
-        return ResponseEntity.ok(dadosList);
-    }
+       if(dadosList.isEmpty()) {
+           throw  new ResponseStatusException(HttpStatus.NO_CONTENT,"Nenhum Valor Encontrado Na Database");
+       } else return ResponseEntity.ok(dadosList);
 
+    }
     @Operation(summary = "Show Dados by Id", description = "Get a Dados by its id", tags = {"Basic CRUD"})
     @GetMapping(value = "/{id}")
     public ResponseEntity<Dados> getDadosById(@PathVariable Long id) {

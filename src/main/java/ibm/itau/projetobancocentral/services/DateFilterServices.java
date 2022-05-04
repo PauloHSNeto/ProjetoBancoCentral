@@ -54,7 +54,7 @@ public class DateFilterServices {
         Dados answer =  new Dados();
         for (Dados d : dadosRepository.findAll()) {
             if (d.getData().isAfter(dados.getData())) {
-                answer = d;
+               return d;
             }
         }
         return answer;

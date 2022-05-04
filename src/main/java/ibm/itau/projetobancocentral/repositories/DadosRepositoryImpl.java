@@ -98,16 +98,6 @@ public class DadosRepositoryImpl {
         return listaFiltrada;
     }
 
-    List<Dados> findDadosBetweenDates(LocalDate localDate1, LocalDate localDate2){
-        List<Dados> list = dadosRepository.findAll();
-        List<Dados> listaFiltrada = new ArrayList<>();
-        for (Dados d : list){
-            if (d.getData().isAfter(localDate1.minusDays(1)) && d.getData().isBefore(localDate2.plusDays(1))){
-                listaFiltrada.add(d);
-            }
-        }
-        return listaFiltrada;
-    }
 
 
 

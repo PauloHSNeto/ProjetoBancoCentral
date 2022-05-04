@@ -2,6 +2,7 @@ package ibm.itau.projetobancocentral.entities;
 
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -11,9 +12,9 @@ class DadosTest {
     @Test
     void constructorWithAllArgsTest() {
         //given
-        Dados dados = new Dados(1L,null,0.0,0.0);
+        Dados dados = new Dados(1L,null,0.0);
         //when
-        Dados dados2 = new Dados(1L,null,0.0,0.0);
+        Dados dados2 = new Dados(1L,null,0.0);
         //then
         assertEquals(dados, dados2);
     }

@@ -81,4 +81,57 @@ class DateFilterServicesTest {
         System.out.println(expected);
         assertEquals(expected, result);
     }
+
+    @Test
+    void findFirstEntryBeforeDate() {
+        //given
+        List<Dados> dados = new ArrayList<>();
+        dados.add(new Dados(LocalDate.of(2001,01,11),1.1));
+        dados.add(new Dados(LocalDate.of(2002,02,12),1.2));
+        dados.add(new Dados(LocalDate.of(2003,03,13),1.3));
+        dados.add(new Dados(LocalDate.of(2004,04,14),1.4));
+        dados.add(new Dados(LocalDate.of(2005,05,15),1.5));
+        Dados d = new Dados(LocalDate.of(2003,03,13),1.3);
+        Dados dBefore = new Dados(LocalDate.of(2002,02,12),1.2);
+        //when
+        when(mockRepository.findAll()).thenReturn(dados);
+        Dados result = dateFilterServices.findFirstEntryBeforeDate(d);
+        //then
+        assertEquals(dBefore,result);
+    }
+
+    @Test
+    void findFirstEntryAfterDate() {
+        //given
+        List<Dados> dados = new ArrayList<>();
+        dados.add(new Dados(LocalDate.of(2001,01,11),1.1));
+        dados.add(new Dados(LocalDate.of(2002,02,12),1.2));
+        dados.add(new Dados(LocalDate.of(2003,03,13),1.3));
+        dados.add(new Dados(LocalDate.of(2004,04,14),1.4));
+        dados.add(new Dados(LocalDate.of(2005,05,15),1.5));
+        Dados d = new Dados(LocalDate.of(2003,03,13),1.3);
+        Dados dAfter = new Dados(LocalDate.of(2004,04,14),1.4);
+        //when
+        when(mockRepository.findAll()).thenReturn(dados);
+        Dados result = dateFilterServices.findFirstEntryAfterDate(d);
+        //then
+        assertEquals(dAfter,result);
+    }
+
+    @Test
+    void findByDate() {
+        //given
+        List<Dados> dados = new ArrayList<>();
+        dados.add(new Dados(LocalDate.of(2001,01,11),1.1));
+        dados.add(new Dados(LocalDate.of(2002,02,12),1.2));
+        dados.add(new Dados(LocalDate.of(2003,03,13),1.3));
+        dados.add(new Dados(LocalDate.of(2004,04,14),1.4));
+        dados.add(new Dados(LocalDate.of(2005,05,15),1.5));
+        Dados d = new Dados(LocalDate.of(2003,03,13),1.3);
+        //when
+        when(mockRepository.findAll()).thenReturn(dados);
+        Dados result = dateFilterServices.findByDate("2003-03-13");
+        //then
+        assertEquals(d,result);
+    }
 }

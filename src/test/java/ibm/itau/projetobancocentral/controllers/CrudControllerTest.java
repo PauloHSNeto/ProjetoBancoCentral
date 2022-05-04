@@ -13,7 +13,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.ResponseEntity;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -36,10 +38,19 @@ class CrudControllerTest {
     }
     @Test
     void getDadosTest() {
+        //given
+        List<Dados> dados = new ArrayList<>();
+        dados.add(new Dados(LocalDate.now(),1.5));
+        dados.add(new Dados(LocalDate.now(),1.5));
+        dados.add(new Dados(LocalDate.now(),1.5));
         //when
+        when(mockService.getAllDados()).thenReturn(dados);
         controller.getDados("data");
         //then
         verify(mockService).getAllDados();
+        verify(mockValueService,times(1)).sortByValorOrDate(dados,"data");
+        verify(mockValueService,times(1)).updateDifference();
+
     }
     @Test
     void getDadosByIdTest() {

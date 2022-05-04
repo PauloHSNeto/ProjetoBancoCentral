@@ -11,10 +11,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.ResponseEntity;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -61,6 +64,36 @@ class DateFilterControllerTest {
         //then
         verify(mockService, times(1)).findByYear(2020);
         verify(mockValueService, times(1)).sortByValorOrDate(dados, "data");
+
+    }
+
+    @Test
+    void getDadosBetweenTest() {
+        //given
+        List<Dados> dados = new ArrayList<>();
+        dados.add(new Dados(LocalDate.now(),1.5));
+        List<Dados> dadosFiltrados = new ArrayList<>();
+        dados.add(new Dados(LocalDate.now(),1.5));
+        dadosFiltrados.add(new Dados(LocalDate.now(),1.5));
+        dadosFiltrados.add(new Dados(LocalDate.now(),1.5));
+        ResponseEntity<List<Dados>> expectedEntity = ResponseEntity.ok(dadosFiltrados);
+        //when
+        when(mockService.findBetweenDates("2001-01-01","2002-01-01")).thenReturn(dadosFiltrados);
+        ResponseEntity<List<Dados>> result = dateFilterController.getDadosBetween("2001-01-01","2002-01-01");
+        //then
+        assertEquals(expectedEntity, result);
+    }
+
+    @Test
+    void getDadosByDateTest() {
+        //given
+        Dados d1 = new Dados(LocalDate.now(),1.5);
+        ResponseEntity<Dados> expectedEntity = ResponseEntity.ok(d1);
+        //when
+        when(mockService.findByDate("2001-01-01")).thenReturn(d1);
+        ResponseEntity<Dados> result = dateFilterController.getDadosByDate("2001-01-01");
+        //then
+        assertEquals(expectedEntity, result);
 
     }
 }

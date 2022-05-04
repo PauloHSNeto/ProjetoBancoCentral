@@ -2,6 +2,7 @@ package ibm.itau.projetobancocentral.services;
 
 import ibm.itau.projetobancocentral.entities.Dados;
 import ibm.itau.projetobancocentral.repositories.DadosRepository;
+import org.junit.Ignore;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,6 +14,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -235,10 +237,8 @@ class ValueServicesTest {
         Dados d2 = new Dados(LocalDate.of(2000,1,1), 2d);
         Dados d3 = new Dados(LocalDate.of(2001,1,1), 6d);
         List<Dados> dados = new ArrayList<>();
-
         dados.add(d1);
         dados.add(d2);
-
         when(mockRepository.findByYear(2000)).thenReturn(dados);
         //when
         double result = valueServices.mediaByYear(2000);
@@ -246,5 +246,102 @@ class ValueServicesTest {
         assertEquals(1.5, result);
 
 
+    }
+
+    @Test
+    void findByMaxValueTest() {
+        //given
+        Dados d1 = new Dados(LocalDate.of(2000,1,1), 2d);
+        Dados d2 = new Dados(LocalDate.of(2000,1,2), 2.5d);
+        List<Dados> dados = new ArrayList<>();
+        dados.add(d1);
+        dados.add(d2);
+        //when
+        when(mockRepository.findAll()).thenReturn(dados);
+        Dados result = valueServices.findByMaxValue();
+        //then
+        assertEquals(d2, result);
+    }
+
+    @Test
+    void findByMinValueTest() {
+        //given
+        Dados d1 = new Dados(LocalDate.of(2000,1,1), 2d);
+        Dados d2 = new Dados(LocalDate.of(2000,1,2), 2.5d);
+        List<Dados> dados = new ArrayList<>();
+        dados.add(d1);
+        dados.add(d2);
+        //when
+        when(mockRepository.findAll()).thenReturn(dados);
+        Dados result = valueServices.findByMinValue();
+        //then
+        assertEquals(d1, result);
+    }
+
+    @Test
+    void findByMaxValueOfYearTest() {
+        //given
+        Dados d1 = new Dados(LocalDate.of(2000,1,1), 1d);
+        Dados d2 = new Dados(LocalDate.of(2000,1,2), 1.5d);
+        Dados d3 = new Dados(LocalDate.of(2001,1,1), 2d);
+        Dados d4 = new Dados(LocalDate.of(2001,1,2), 2.5d);
+        List<Dados> dados = new ArrayList<>();
+        dados.add(d1);
+        dados.add(d2);
+        //when
+        when(mockRepository.findByYear(2000)).thenReturn(dados);
+        Dados result = valueServices.findByMaxValueOfYear(2000);
+        //then
+        assertEquals(d2, result);
+    }
+
+    @Test
+    void findByMinValueofYearTest() {
+        //given
+        Dados d1 = new Dados(LocalDate.of(2000,1,1), 1d);
+        Dados d2 = new Dados(LocalDate.of(2000,1,2), 1.5d);
+        Dados d3 = new Dados(LocalDate.of(2001,1,1), 2d);
+        Dados d4 = new Dados(LocalDate.of(2001,1,2), 2.5d);
+        List<Dados> dados = new ArrayList<>();
+        dados.add(d1);
+        dados.add(d2);
+        //when
+        when(mockRepository.findByYear(2000)).thenReturn(dados);
+        Dados result = valueServices.findByMinValueofYear(2000);
+        //then
+        assertEquals(d1, result);
+    }
+
+    @Test
+    @Ignore
+    void sortByValorTest() {//given
+        Dados d1 = new Dados(LocalDate.of(2000,1,1), 1d);
+        Dados d2 = new Dados(LocalDate.of(2000,1,2), 1.5d);
+        Dados d3 = new Dados(LocalDate.of(2001,1,1), 2d);
+        Dados d4 = new Dados(LocalDate.of(2001,1,2), 2.5d);
+        List<Dados> dados = new ArrayList<>();
+        dados.add(d1);
+        dados.add(d2);
+        //when
+        when(mockRepository.findByYear(2000)).thenReturn(dados);
+        Dados result = valueServices.findByMinValueofYear(2000);
+        //then
+        assertEquals(d1, result);
+    }
+
+    @Test
+    @Ignore
+    void sortByDateTest() {//given
+        Dados d1 = new Dados(LocalDate.of(2000,1,1), 1d);
+        Dados d2 = new Dados(LocalDate.of(2000,1,2), 1.5d);
+        Dados d3 = new Dados(LocalDate.of(2001,1,1), 2d);
+        Dados d4 = new Dados(LocalDate.of(2001,1,2), 2.5d);
+        List<Dados> dados = new ArrayList<>(Arrays.asList(d2,d1,d4,d3));
+        List<Dados> dadosOrdenados = new ArrayList<>(Arrays.asList(d1,d2,d3,d4));
+        //when
+        when(mockRepository.findByYear(2000)).thenReturn(dados);
+        Dados result = valueServices.findByMinValueofYear(2000);
+        //then
+        assertEquals(d1, result);
     }
 }

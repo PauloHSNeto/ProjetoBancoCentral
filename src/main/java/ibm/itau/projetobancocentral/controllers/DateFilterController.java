@@ -62,7 +62,7 @@ public class DateFilterController {
         Dados dado = null;
            dado = dateFilterServices.findByDate(date);
            if (dado == null ) {
-               throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Dado com data: " + date.toString() + " não encontrado");
+               throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Dado com data: " + date + " não encontrado");
            }
         valueServices.updateDifference();
         return ResponseEntity.ok(dado);

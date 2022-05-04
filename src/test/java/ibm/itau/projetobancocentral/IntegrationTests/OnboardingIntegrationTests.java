@@ -5,6 +5,7 @@ import ibm.itau.projetobancocentral.controllers.CrudController;
 import ibm.itau.projetobancocentral.entities.Dados;
 import ibm.itau.projetobancocentral.repositories.DadosRepository;
 import ibm.itau.projetobancocentral.services.CrudServices;
+import org.junit.Ignore;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -37,22 +38,21 @@ public class OnboardingIntegrationTests {
     public TestRestTemplate restTemplate;
 
     @Test
+    @Ignore
     public void testOnboarding() throws Exception {
         //GIVEN
-        String url ="link da api";
+        String url ="https://api.bcb.gov.br/dados/serie/bcdata.sgs.4505/dados?formato=json";
 
         Dados d1 = new Dados(LocalDate.now(),1.4);
         Dados d2 = new Dados(LocalDate.now(),1.5);
         Dados d3 = new Dados(LocalDate.now(),1.6);
         Dados[] dados = new Dados[]{d1,d2,d3};
-        //WHEN
-        when(restTemplate.getForObject(url, Dados[].class)).thenReturn(dados);
         //THEN
         mockMvc.perform(MockMvcRequestBuilders.post("/onboarding").content(url).contentType(String.valueOf(String.class)))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.status().isOk()).andReturn();
-        assert dadosRepository.findAll().size() == 3;
+        assert dadosRepository.findAll().size() == 243;
     }
 
 }

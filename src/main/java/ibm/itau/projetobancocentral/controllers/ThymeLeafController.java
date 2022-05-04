@@ -17,7 +17,7 @@ public class ThymeLeafController {
     @RequestMapping
     public String index(Model model) {
          {
-            model.addAttribute("dados", crudController.getDados("dados").getBody());
+            model.addAttribute("dados", crudController.getDados("data").getBody());
             return "index";
         }
     }
