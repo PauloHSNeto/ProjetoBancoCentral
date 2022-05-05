@@ -4,6 +4,10 @@ import ibm.itau.projetobancocentral.entities.Dados;
 import ibm.itau.projetobancocentral.repositories.DadosRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -49,6 +53,20 @@ public class CrudServices {
             }
         }return null;
     }
+//Paged service
 
+    public Page<Dados> findAllPagedService(int size, String sort){
+        int page = 0;
+        PageRequest pageRequest = PageRequest.of(
+                page,
+                size,
+                Sort.Direction.ASC,
+                sort);
+        valueServices.updateDifference();
+        return new PageImpl<>(
+                dadosRepository.findAll(),
+                pageRequest, size);
+
+    }
 
 }

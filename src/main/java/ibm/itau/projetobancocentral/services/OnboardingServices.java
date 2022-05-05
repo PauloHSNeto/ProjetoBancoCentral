@@ -32,6 +32,6 @@ public class OnboardingServices {
 
     }
     public void deleteOnboarding(){
-        dadosRepository.deleteAll();
+        dadosRepository.truncateTable();
     }
 }

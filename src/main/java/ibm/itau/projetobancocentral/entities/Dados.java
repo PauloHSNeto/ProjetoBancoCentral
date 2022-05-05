@@ -3,6 +3,7 @@ package ibm.itau.projetobancocentral.entities;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,10 +14,11 @@ import java.text.DecimalFormat;
 import java.time.LocalDate;
 
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table
+@Table(name = "tb_dados")
 public class Dados implements Serializable{
     private static final long serialVersionUID = 1L;
 
@@ -26,7 +28,7 @@ public class Dados implements Serializable{
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy") //formata a data
     private LocalDate data;
     private Double valor;
-    @Column(name = "difference", precision = 3)
+    @Column(name = "difference", scale = 2, precision = 2)
     private BigDecimal difference; //Change to BIGDECIMAL
 
     public Dados(LocalDate data, Double valor) {
