@@ -28,7 +28,6 @@ public class Dados implements Serializable{
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy") //formata a data
     private LocalDate data;
     private Double valor;
-    @Column(name = "difference", scale = 2, precision = 2)
     private BigDecimal difference; //Change to BIGDECIMAL
 
     public Dados(LocalDate data, Double valor) {

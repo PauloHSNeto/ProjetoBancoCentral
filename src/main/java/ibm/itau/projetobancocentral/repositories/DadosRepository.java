@@ -29,7 +29,4 @@ public interface DadosRepository extends JpaRepository<Dados, Long> {
 
     List<Dados> findByYearBelowValue(int year, double value);
 
-    @Query(value = "truncate table tb_dados",nativeQuery = true)
-    void truncateTable();
-
 }

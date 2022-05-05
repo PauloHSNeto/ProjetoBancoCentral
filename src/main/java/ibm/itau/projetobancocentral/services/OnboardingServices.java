@@ -23,15 +23,12 @@ public class OnboardingServices {
 
 
     public String onboarding(String url){
-
-
         Dados[] arraysDeDados = restTemplate.getForObject(url, Dados[].class);
         dadosRepository.saveAll(Arrays.asList(arraysDeDados));
         valueServices.updateDifference();
         return "Success!";
-
     }
     public void deleteOnboarding(){
-        dadosRepository.truncateTable();
+        dadosRepository.deleteAll();
     }
 }
