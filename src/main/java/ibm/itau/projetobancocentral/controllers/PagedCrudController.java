@@ -6,6 +6,8 @@ import ibm.itau.projetobancocentral.services.CrudServices;
 //import ibm.itau.projetobancocentral.services.PagedServices;
 import ibm.itau.projetobancocentral.services.PagedServices;
 import ibm.itau.projetobancocentral.services.ValueServices;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -23,18 +25,18 @@ import java.util.List;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/paged")
+@Tag(name = "Paged", description = "Basic GetALL Pageable")
 public class PagedCrudController {
 
     @Autowired
     private PagedServices pagedServices;
-    @Autowired
-    private ValueServices valueServices;
 
+    @Operation(summary = "Show All Paged", description = "Show All Dados with Pagination", tags = {"Paged"})
     @GetMapping
     public ResponseEntity<Page<Dados>> getAllPagedController(
             @RequestParam(value = "page", defaultValue = "0") int page,
             @RequestParam(value = "size", defaultValue = "10") int size,
-            @RequestParam(value = "sort", defaultValue = "id") String sort) {
+            @RequestParam(value = "sort", defaultValue = "data") String sort) {
         Page<Dados> dados = pagedServices.findAllPagedService(page, size, sort);
         if (dados.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Nenhum dado encontrado");

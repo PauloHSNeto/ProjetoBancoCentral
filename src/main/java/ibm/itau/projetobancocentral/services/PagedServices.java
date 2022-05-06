@@ -15,9 +15,7 @@ import java.util.Optional;
 public class PagedServices {
 
     @Autowired
-    private final DadosRepository dadosRepository;
-    @Autowired
-    private ValueServices valueServices;
+    private DadosRepository dadosRepository;
     @Autowired
     DateFilterServices dateFilterServices;
     @Autowired
