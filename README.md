@@ -52,3 +52,5 @@ Os testes unitários e de integração foram feitos com Mockito, JUnit e TestTem
 
 A documentacao da api foi feita pela plataforma OpenAPI e pode acessada pelo link http://localhost:8080/swagger-ui/index.html#/
 
+Adcionei uma nova camada para mostrar os dados de forma paginada, criei a funcao de pegar todos os dados (na qual podemos selecionar parametros como filtrar por ano e/ou ordenar por ou valor da divida) ou encontrar apenao um por Id ou Data.
+
