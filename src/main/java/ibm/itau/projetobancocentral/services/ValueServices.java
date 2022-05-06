@@ -63,7 +63,8 @@ public class ValueServices {
         List<Dados> list = dadosRepository.findAll();
         list.sort((o1, o2) -> o1.getData().compareTo(o2.getData()));
         for (int i = 1; i < list.size(); i++) {//atualiza a diferenca entre valores
-                list.get(i).setDifference((BigDecimal.valueOf(list.get(i).getValor() - list.get(i-1).getValor())));
+               double diference = (list.get(i).getValor())-((list.get(i-1).getValor()));
+               list.get(i).setDifference(BigDecimal.valueOf(diference));
                 dadosRepository.save(list.get(i));
             }
         }

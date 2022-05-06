@@ -53,20 +53,4 @@ public class CrudServices {
             }
         }return null;
     }
-//Paged service
-
-    public Page<Dados> findAllPagedService(int size, String sort){
-        int page = 0;
-        PageRequest pageRequest = PageRequest.of(
-                page,
-                size,
-                Sort.Direction.ASC,
-                sort);
-        valueServices.updateDifference();
-        return new PageImpl<>(
-                dadosRepository.findAll(),
-                pageRequest, size);
-
-    }
-
 }

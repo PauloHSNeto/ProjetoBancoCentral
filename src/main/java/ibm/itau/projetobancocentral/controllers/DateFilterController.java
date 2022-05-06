@@ -32,28 +32,24 @@ public class DateFilterController {
     @GetMapping(value = "/day/{day}")
     public ResponseEntity<List<Dados>> getDadosByDia(@PathVariable int day) {
         List<Dados> dados = dateFilterServices.findByDay(day);
-        valueServices.updateDifference();
         return ResponseEntity.ok(dados);
     }
     @Operation(summary = "Show Dados by month", description = "Get a list of Dados by its month`s name", tags = {"Date Filters"})
     @GetMapping(value = "/month/{month}")
     public ResponseEntity<List<Dados>> getDadosByMes(@PathVariable String month) {
         List<Dados> dados = dateFilterServices.findByMonth(month);
-        valueServices.updateDifference();
         return ResponseEntity.ok(dados);
     }
     @Operation(summary = "Show Dados by year", description = "Get a list of Dados from an year", tags = {"Date Filters"})
     @GetMapping(value = "/year/{year}")
     public ResponseEntity<List<Dados>> getDadosByAno(@RequestParam(defaultValue = "data") String sortBy, @PathVariable int year) {
         List<Dados> dados = dateFilterServices.findByYear(year);
-        valueServices.sortByValorOrDate(dados, sortBy);
         return ResponseEntity.ok(dados);
     }
     @Operation(summary = "Show Dados by Between dates", description = "Get a list of Dados between two dates", tags = {"Date Filters"})
     @GetMapping(value ="/between")
     public ResponseEntity<List<Dados>> getDadosBetween(@RequestParam String startDate, @RequestParam String endDate) {
         List<Dados> dados = dateFilterServices.findBetweenDates(startDate, endDate);
-        valueServices.updateDifference();
         return ResponseEntity.ok(dados);
     }
     @GetMapping()
@@ -64,7 +60,6 @@ public class DateFilterController {
            if (dado == null ) {
                throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Dado com data: " + date + " não encontrado");
            }
-        valueServices.updateDifference();
         return ResponseEntity.ok(dado);
     }
 }

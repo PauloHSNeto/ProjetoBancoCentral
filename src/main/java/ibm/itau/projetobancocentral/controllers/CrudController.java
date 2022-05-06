@@ -34,7 +34,6 @@ public class CrudController {
     public ResponseEntity<List<Dados>> getDados(@RequestParam(defaultValue = "data") String sortBy) {
         List<Dados> dadosList = crudServices.getAllDados();
        valueServices.sortByValorOrDate(dadosList, sortBy);
-       valueServices.updateDifference();
        if(dadosList.isEmpty()) {
            throw  new ResponseStatusException(HttpStatus.NO_CONTENT,"Nenhum Valor Encontrado Na Database");
        } else return ResponseEntity.ok(dadosList);

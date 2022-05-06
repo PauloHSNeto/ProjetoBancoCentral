@@ -29,4 +29,5 @@ public interface DadosRepository extends JpaRepository<Dados, Long> {
 
     List<Dados> findByYearBelowValue(int year, double value);
 
+
 }
