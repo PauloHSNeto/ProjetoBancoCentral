@@ -31,17 +31,34 @@ public class PagedCrudController {
     @Autowired
     private PagedServices pagedServices;
 
-    @Operation(summary = "Show All Paged", description = "Show All Dados with Pagination", tags = {"Paged"})
+    @Operation(summary = "Show All Paged", description = "Show All Dados with Pagination, can be sorted and filtered by Year", tags = {"Paged"})
     @GetMapping
     public ResponseEntity<Page<Dados>> getAllPagedController(
             @RequestParam(value = "page", defaultValue = "0") int page,
             @RequestParam(value = "size", defaultValue = "10") int size,
-            @RequestParam(value = "sort", defaultValue = "data") String sort) {
-        Page<Dados> dados = pagedServices.findAllPagedService(page, size, sort);
+            @RequestParam(value = "sort", defaultValue = "data") String sort,
+            @RequestParam(value = "year", defaultValue = "0") int year) {
+        Page<Dados> dados = pagedServices.findAllPagedService(page, size, sort, year);
         if (dados.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Nenhum dado encontrado");
         } else {
             return new ResponseEntity<>(dados, HttpStatus.OK);
         }
     }
+    @Operation(summary = "Find Paged by ID or Date", description = "Find Dados by ID or Date in  the yyyy-MM-dd format", tags = {"Paged"})
+    @GetMapping("/find")
+    public ResponseEntity<Page<Dados>> findPagedController(
+            @RequestParam(value = "page", defaultValue = "0") int page,
+            @RequestParam(value = "size", defaultValue = "1") int size,
+            @RequestParam(value = "id", defaultValue = "0") Long id,
+            @RequestParam(value = "date", defaultValue = "not-requested") String date) {
+        Page<Dados> dados = pagedServices.findPagedService(page, size, id, date);
+        if (dados.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Nenhum dado encontrado");
+
+        } else {
+            return    new ResponseEntity<>(dados, HttpStatus.OK);
+    }
+    }
+
 }
