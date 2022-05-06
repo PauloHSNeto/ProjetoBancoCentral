@@ -55,10 +55,8 @@ public class PagedCrudController {
         Page<Dados> dados = pagedServices.findPagedService(page, size, id, date);
         if (dados.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Nenhum dado encontrado");
-
         } else {
             return    new ResponseEntity<>(dados, HttpStatus.OK);
     }
     }
-
 }

@@ -34,7 +34,6 @@ public class PagedServices {
             return dadosRepository.findAll(PageRequest.of(page, size, Sort.by(sort).ascending()));
         }
     }
-
     public Page<Dados> findPagedService(int page, int size, Long id, String date) {
         List<Dados> dados = dadosRepository.findAll();
         Dados result = new Dados();

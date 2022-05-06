@@ -11,5 +11,4 @@ public class ProjetoConfig {
     public RestTemplate restTemplate() {
         return new RestTemplate();
     }
-
 }
