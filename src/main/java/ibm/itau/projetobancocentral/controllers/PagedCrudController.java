@@ -36,7 +36,7 @@ public class PagedCrudController {
     public ResponseEntity<Page<Dados>> getAllPagedController(
             @RequestParam(value = "page", defaultValue = "0") int page,
             @RequestParam(value = "size", defaultValue = "10") int size,
-            @RequestParam(value = "sort", defaultValue = "valor") String sort,
+            @RequestParam(value = "sort", defaultValue = "data") String sort,
             @RequestParam(value = "year", defaultValue = "0") int year) {
         Page<Dados> dados = pagedServices.findAllPagedService(page, size, sort, year);
         if (dados.isEmpty()) {
