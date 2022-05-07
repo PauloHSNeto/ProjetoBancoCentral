@@ -21,7 +21,8 @@ import java.time.LocalDate;
 @Table(name = "tb_dados")
 public class Dados implements Serializable{
     private static final long serialVersionUID = 1L;
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy") //formata a data
     private LocalDate data;
