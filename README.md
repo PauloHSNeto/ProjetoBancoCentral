@@ -54,3 +54,13 @@ A documentacao da api foi feita pela plataforma OpenAPI e pode acessada pelo lin
 
 Adcionei uma nova camada para mostrar os dados de forma paginada, criei a funcao de pegar todos os dados (na qual podemos selecionar parametros como filtrar por ano e/ou ordenar por ou valor da divida) ou encontrar apenao um por Id ou Data.
 
+
+TODO: 
+      Criar imgagem do aplicativo e rodar rodar no docker;
+      Adcionar Testes unitarios e de integracao para aumentar a coverage;
+      Melhorar a spa feita com thymeleaf(adcionar formas de filtrar or vaores, e alterar a database);
+      Adcionar Spring Security para tornar a plicacao mais segura(criar tabela de usuarios com niveis de acesso diferentes);
+      Subir a aplicacao para uma rede cloud (preferencia aws)
+      
+
+
