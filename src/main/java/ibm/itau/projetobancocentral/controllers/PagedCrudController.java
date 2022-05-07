@@ -59,4 +59,33 @@ public class PagedCrudController {
             return    new ResponseEntity<>(dados, HttpStatus.OK);
     }
     }
+    @Operation(summary = "Find Paged by Value", description = "Find Dados by By Max/Min Valur of Total/Year", tags = {"Paged"})
+    @GetMapping("/findbyvalue")
+    public ResponseEntity<Page<Dados>> findPagedController(
+            @RequestParam(value = "page", defaultValue = "0") int page,
+            @RequestParam(value = "size", defaultValue = "1") int size,
+            @RequestParam(value = "maxMin", defaultValue = "max") String maxMin,
+            @RequestParam(value = "year", defaultValue = "0") int  year) {
+        Page<Dados> dados = pagedServices.findPagedValueService(page, size, maxMin, year);
+        if (dados.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Nenhum dado encontrado");
+        } else {
+            return    new ResponseEntity<>(dados, HttpStatus.OK);
+        }
+    }
+    @Operation(summary = "Show All Between Dates", description = "Show Dados Between Dates (yyyy-MM-dd) with Pagination, can be sorted by Date or Value and filtered by Year", tags = {"Paged"})
+    @GetMapping
+    public ResponseEntity<Page<Dados>> getBetweenPagedController(
+            @RequestParam(value = "page", defaultValue = "0") int page,
+            @RequestParam(value = "size", defaultValue = "10") int size,
+            @RequestParam(value = "sort", defaultValue = "data") String sort,
+            @RequestParam(value = "startDate", defaultValue = "not-requested") String startDate,
+            @RequestParam(value = "endDate", defaultValue = "not-requested") String endDate) {
+        Page<Dados> dados = pagedServices.findBetweenPagedService(page, size, sort, startDate, endDate);
+        if (dados.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Nenhum dado encontrado");
+        } else {
+            return new ResponseEntity<>(dados, HttpStatus.OK);
+        }
+    }
 }

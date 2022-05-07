@@ -17,7 +17,8 @@ import java.util.Optional;
 @AllArgsConstructor
 @Service
 public class PagedServices {
-
+    @Autowired
+   private ValueServices valueService;
     @Autowired
     private DadosRepository dadosRepository;
     @Autowired
@@ -44,6 +45,23 @@ public class PagedServices {
             result = dados.stream().filter(d -> d.getId().equals(id)).findFirst().get();
         }
         Page<Dados> dadosPage = new PageImpl<>(List.of(result), PageRequest.of(page, size), 1);
+        return dadosPage;
+    }
+
+    public Page<Dados> findPagedValueService(int page, int size, String maxMin, int year) {
+        List<Dados> dados = dadosRepository.findAll();
+        Dados result = new Dados();
+        if (maxMin == "max" && year == 0) result = valueService.findByMaxValue();
+        if (maxMin == "max"&& year != 0) result = valueService.findByMaxValueOfYear(year);
+        if ( maxMin == "min"&& year == 0) result = valueService.findByMinValue();
+        if ( maxMin == "min"&& year != 0) result = valueService.findByMinValueofYear(year);
+        Page<Dados> dadosPage = new PageImpl<>(List.of(result), PageRequest.of(page, size), 1);
+        return dadosPage;
+    }
+
+    public Page<Dados> findBetweenPagedService(int page, int size, String sort, String startDate, String endDate) {
+           List<Dados> dados = dateFilterServices.findBetweenDates(startDate, endDate);
+           Page<Dados> dadosPage = new PageImpl<>(dados, PageRequest.of(page, size,Sort.by(sort).ascending()), 1);
         return dadosPage;
     }
 }
