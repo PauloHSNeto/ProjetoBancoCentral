@@ -29,7 +29,7 @@ public class PagedServices {
     public Page<Dados> findAllPagedService(int page, int size, String sort, int year) {
         if (year != 0) {
             List<Dados> dados = dadosRepository.findByYear(year);
-            Page<Dados> dadosPage = new PageImpl<>(dados, PageRequest.of(page, size), 1);
+            Page<Dados> dadosPage = new PageImpl<>(dados, PageRequest.of(page, size,Sort.by(sort).ascending()), 1);
             return dadosPage;
         }else {
             return dadosRepository.findAll(PageRequest.of(page, size, Sort.by(sort).ascending()));
@@ -47,18 +47,15 @@ public class PagedServices {
         Page<Dados> dadosPage = new PageImpl<>(List.of(result), PageRequest.of(page, size), 1);
         return dadosPage;
     }
-
     public Page<Dados> findPagedValueService(int page, int size, String maxMin, int year) {
-        List<Dados> dados = dadosRepository.findAll();
         Dados result = new Dados();
         if (maxMin == "max" && year == 0) result = valueService.findByMaxValue();
-        if (maxMin == "max"&& year != 0) result = valueService.findByMaxValueOfYear(year);
-        if ( maxMin == "min"&& year == 0) result = valueService.findByMinValue();
-        if ( maxMin == "min"&& year != 0) result = valueService.findByMinValueofYear(year);
+        if (maxMin == "max" && year != 0) result = valueService.findByMaxValueOfYear(year);
+        if (maxMin == "min" && year == 0) result = valueService.findByMinValue();
+        if (maxMin == "min" && year != 0) result = valueService.findByMinValueofYear(year);
         Page<Dados> dadosPage = new PageImpl<>(List.of(result), PageRequest.of(page, size), 1);
         return dadosPage;
     }
-
     public Page<Dados> findBetweenPagedService(int page, int size, String sort, String startDate, String endDate) {
            List<Dados> dados = dateFilterServices.findBetweenDates(startDate, endDate);
            Page<Dados> dadosPage = new PageImpl<>(dados, PageRequest.of(page, size,Sort.by(sort).ascending()), 1);

@@ -36,7 +36,7 @@ public class PagedCrudController {
     public ResponseEntity<Page<Dados>> getAllPagedController(
             @RequestParam(value = "page", defaultValue = "0") int page,
             @RequestParam(value = "size", defaultValue = "10") int size,
-            @RequestParam(value = "sort", defaultValue = "data") String sort,
+            @RequestParam(value = "sort", defaultValue = "valor") String sort,
             @RequestParam(value = "year", defaultValue = "0") int year) {
         Page<Dados> dados = pagedServices.findAllPagedService(page, size, sort, year);
         if (dados.isEmpty()) {
@@ -74,7 +74,7 @@ public class PagedCrudController {
         }
     }
     @Operation(summary = "Show All Between Dates", description = "Show Dados Between Dates (yyyy-MM-dd) with Pagination, can be sorted by Date or Value and filtered by Year", tags = {"Paged"})
-    @GetMapping
+    @GetMapping("/between")
     public ResponseEntity<Page<Dados>> getBetweenPagedController(
             @RequestParam(value = "page", defaultValue = "0") int page,
             @RequestParam(value = "size", defaultValue = "10") int size,
