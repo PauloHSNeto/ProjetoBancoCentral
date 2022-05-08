@@ -10,9 +10,8 @@ import org.springframework.stereotype.Service;
 import javax.swing.text.DateFormatter;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Service
@@ -27,22 +26,23 @@ public class PagedServices {
     CrudServices crudServices;
 
     public Page<Dados> findAllPagedService(int page, int size, String sort, int year) {
+        List<Dados> dados = new ArrayList<>();
         if (year != 0) {
-            List<Dados> dados = dadosRepository.findByYear(year);
-            Page<Dados> dadosPage = new PageImpl<>(dados, PageRequest.of(page, size,Sort.by(sort).ascending()), 1);
-            return dadosPage;
+           dados = dadosRepository.findByYear(year);
         }else {
-            return dadosRepository.findAll(PageRequest.of(page, size, Sort.by(sort).ascending()));
+            dados = dadosRepository.findAll();
         }
+        valueService.sortByValorOrDate(dados, sort);
+        Page<Dados> dadosPage = new PageImpl<>(dados, PageRequest.of(page, size), 1);
+        return dadosPage;
     }
     public Page<Dados> findPagedService(int page, int size, Long id, String date) {
         List<Dados> dados = dadosRepository.findAll();
         Dados result = new Dados();
-        if (id == 0L) {
-            LocalDate requestedDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-            result = dados.stream().filter(d -> d.getData().equals(requestedDate)).findFirst().get();
+        if (id == 1L) {
+            result = dateFilterServices.findByDate(date);
         } else if (date == "not-requested") {
-            result = dados.stream().filter(d -> d.getId().equals(id)).findFirst().get();
+            result = crudServices.findById(id);
         }
         Page<Dados> dadosPage = new PageImpl<>(List.of(result), PageRequest.of(page, size), 1);
         return dadosPage;
@@ -50,15 +50,16 @@ public class PagedServices {
     public Page<Dados> findPagedValueService(int page, int size, String maxMin, int year) {
         Dados result = new Dados();
         if (maxMin == "max" && year == 0) result = valueService.findByMaxValue();
+        else if (maxMin == "min" && year == 0) result = valueService.findByMinValue();
         if (maxMin == "max" && year != 0) result = valueService.findByMaxValueOfYear(year);
-        if (maxMin == "min" && year == 0) result = valueService.findByMinValue();
-        if (maxMin == "min" && year != 0) result = valueService.findByMinValueofYear(year);
-        Page<Dados> dadosPage = new PageImpl<>(List.of(result), PageRequest.of(page, size), 1);
+        else if (maxMin == "min" && year != 0) result = valueService.findByMinValueofYear(year);
+        Page<Dados> dadosPage = new PageImpl<Dados>(List.of(result), PageRequest.of(page, size), 1);
         return dadosPage;
     }
     public Page<Dados> findBetweenPagedService(int page, int size, String sort, String startDate, String endDate) {
            List<Dados> dados = dateFilterServices.findBetweenDates(startDate, endDate);
-           Page<Dados> dadosPage = new PageImpl<>(dados, PageRequest.of(page, size,Sort.by(sort).ascending()), 1);
+           valueService.sortByValorOrDate(dados, sort);
+           Page<Dados> dadosPage = new PageImpl<>(dados, PageRequest.of(page, size), 1);
         return dadosPage;
     }
 }
